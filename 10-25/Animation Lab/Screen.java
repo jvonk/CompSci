@@ -53,10 +53,10 @@ public class Screen extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(835-sunX, 735-sunX, 30, 30);
         g.setColor(Color.DARK_GRAY);
-        if (sunX*3/2<350) {
-        g.fillRect((int)(400.0+Math.sin(-sunX/20.0)*100.0), (int)(333.0+Math.cos(-sunX/20.0)*100.0), 20, 20);
-        g.setColor(Color.BLACK);
-        g.fillRect((int)(400.0+Math.sin(-sunX/20.0)*100.0)+5, (int)(333.0+Math.cos(-sunX/20.0)*100.0)+5, 10, 10);
+        if (sunX*3/2>350) {
+            g.fillRect((int)(400.0+Math.sin(-sunX/20.0)*100.0)-25, (int)(333.0+Math.cos(-sunX/20.0)*100.0), 20, 20);
+            g.setColor(Color.BLACK);
+            g.fillRect((int)(400.0+Math.sin(-sunX/20.0)*100.0)-20, (int)(333.0+Math.cos(-sunX/20.0)*100.0)+5, 10, 10);
         }
         g.setColor(Color.DARK_GRAY);
 
