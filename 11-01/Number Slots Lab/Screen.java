@@ -46,6 +46,12 @@ public class Screen extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         sm.drawMe(g, counter);
+        for (int i = -1200; i <= 400; i+=10) {
+            g.setColor(Color.RED);
+            g.drawString("PLAY AND WIN", (i*10)%800+400, 200-i/2);
+            g.setColor(Color.YELLOW);
+            g.fillOval((int)(Math.sin((counter+i)/10.0)*100.0+300.0+i), (int)(Math.cos((counter+i)/10.0)*100.0+300.0-i), 20, 20);            
+        }
     }
 
     public void animate() {
