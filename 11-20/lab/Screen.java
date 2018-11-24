@@ -10,18 +10,15 @@ public class Screen extends JPanel implements KeyListener {
     private Projectile p1;
     private Ship s1;
     private Enemy[] enemies; 
-    private boolean dead = false;
+    private boolean win;
 
     public Screen() {
-        p1 = new Projectile(50,500);
+        p1 = new Projectile(50,500, true);
         s1 = new Ship(50,300);
         p1.setVelocity(80, 30);
-        enemies = new Enemy[8];
-        enemies[0] = new Enemy(700,30);
-        enemies[1] = new Enemy(700,100);
-        enemies[2] = new Enemy(700,300);
-        for (int i = 0; i < 5; i++) {
-            enemies[3+i]=new Enemy((int)(Math.random()*400+400), (int)(Math.random()*600));
+        enemies = new Enemy[10];
+        for (int i = 0; i < 10; i++) {
+            enemies[i]=new Enemy((int)(Math.random()*800+400), (int)(Math.random()*600));
         }
         addKeyListener (this) ;
         setFocusable(true) ;
@@ -34,15 +31,24 @@ public class Screen extends JPanel implements KeyListener {
 
     public void paintComponent (Graphics g) {
         super.paintComponent (g);
-        for (int i = 0; i < enemies.length; i++)
-            enemies[i].drawMe(g);
-        p1.drawMe(g);
-        if (dead) {
-            g.drawString("YOU LOSE", 100, 100);
+        if (win) {
+            g.drawString("YOU WIN", 100, 100);
         }
-     
-        //Draw ship
-        s1.drawMe(g);
+        else {
+            if (s1.getDead()) {
+                g.drawString("YOU LOSE", 100, 100);
+            } else {
+                for (int i = 0; i < enemies.length; i++)
+                enemies[i].drawMe(g);
+                p1.drawMe(g);
+                win = true;
+                for (int i = 0; i < enemies.length; i++) {
+                    if (!enemies[i].getDead()) win = false;
+                }
+                //Draw ship
+                s1.drawMe(g);
+            }
+        }
     }
 
     public void animate() {
@@ -53,29 +59,25 @@ public class Screen extends JPanel implements KeyListener {
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
+            if (s1.getDead() || win) continue;
             p1.move();
             for (int i = 0; i < enemies.length; i++) {
+                if (enemies[i].getDead()) continue;
                 enemies[i].moveLeft();
-                if (p1.checkCollision(enemies[i])) {
-                    enemies[i] = new Enemy((int)(Math.random()*400+400), (int)(Math.random()*600));
-                }
-                if (s1.checkCollision(enemies[i])) {
-                    dead=true;
-                }
+                enemies[i].checkCollision(p1);
+                s1.checkCollision(enemies[i]);
             }
-
             repaint();
         }
     }
 
     public void keyPressed (KeyEvent e) {
-        if (dead) return;
+        if (s1.getDead()) return;
         int code = e.getKeyCode();
-        System.out.println ("key: " + code ) ;
         if (code == 38) s1.moveUp();
         if (code == 40) s1.moveDown();
         if (code==32) {
-            p1.setPosition(s1.getX()+20, s1.getY());
+            p1.setPosition(s1.getX(), s1.getY()+15);
             p1.setVelocity(0, 3);
         }
         repaint();
