@@ -2,10 +2,11 @@ import java.awt.Graphics;
 
 import java.awt.Color;
 
-public class Ball {
+public class Projectile {
     private double x, y, initX, initY, xVel, yVel, gravity, time;
     private Color red;
-    public Ball(int x, int y){
+    private boolean visibility;
+    public Projectile(int x, int y){
         this.x = x;
         this.y = y;
         this.initX = x;
@@ -13,7 +14,8 @@ public class Ball {
         this.time = 0;
         this.xVel = 0;
         this.yVel = 0;
-        this.gravity = -1;
+        this.gravity = 0;
+        this.visibility = false;
         this.red = new Color(255,0,0);
     }
     public void drawMe(Graphics g) {
@@ -33,16 +35,34 @@ public class Ball {
         x-=5;
     }
     public void moveRight(){
-        x+=5;
+        x++;
+        if (x>800) {
+            visibility=false;
+        }
     }
     public void move() {
         //x = (nil) (t) + x0
-        x = xVel*time + initX;
-        y = (-0.5 * gravity * Math.pow(time,2)) - (yVel * time) + initY;
+        x += xVel;
+        if (x>800) {
+            visibility=false;
+        }
+        yVel -= gravity;
+        y +=  yVel;
         time += .1;
+    }
+    public void setVisible(boolean visible) {
+        visibility=visible;
     }
     public void setVelocity(double angle, double magnitude) {
         xVel = magnitude*Math.cos(Math.toRadians(angle));
         yVel = magnitude*Math.sin(Math.toRadians(angle));
+    }
+    public void setPosition(int x, int y) {
+        System.out.println(visibility);
+        if (!visibility) {
+            visibility=true;
+            this.x = x;
+            this.y = y;
+        }
     }
 }

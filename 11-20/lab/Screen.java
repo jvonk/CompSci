@@ -7,18 +7,20 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 
 public class Screen extends JPanel implements KeyListener {
-    private Ball b1;
+    private Projectile p1;
+    private Ship s1;
     private Enemy[] enemies; 
     private boolean dead = false;
 
     public Screen() {
-        b1 = new Ball(50,500);
-        b1.setVelocity(80, 30);
-        enemies = new Enemy[23];
+        p1 = new Projectile(50,500);
+        s1 = new Ship(50,300);
+        p1.setVelocity(80, 30);
+        enemies = new Enemy[8];
         enemies[0] = new Enemy(700,30);
         enemies[1] = new Enemy(700,100);
         enemies[2] = new Enemy(700,300);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 5; i++) {
             enemies[3+i]=new Enemy((int)(Math.random()*400+400), (int)(Math.random()*600));
         }
         addKeyListener (this) ;
@@ -34,10 +36,13 @@ public class Screen extends JPanel implements KeyListener {
         super.paintComponent (g);
         for (int i = 0; i < enemies.length; i++)
             enemies[i].drawMe(g);
-        b1.drawMe(g);
+        p1.drawMe(g);
         if (dead) {
             g.drawString("YOU LOSE", 100, 100);
         }
+     
+        //Draw ship
+        s1.drawMe(g);
     }
 
     public void animate() {
@@ -48,13 +53,17 @@ public class Screen extends JPanel implements KeyListener {
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-            b1.move();
+            p1.move();
             for (int i = 0; i < enemies.length; i++) {
                 enemies[i].moveLeft();
-                if (b1.checkCollision(enemies[i])) {
-                    dead = true;
+                if (p1.checkCollision(enemies[i])) {
+                    enemies[i] = new Enemy((int)(Math.random()*400+400), (int)(Math.random()*600));
+                }
+                if (s1.checkCollision(enemies[i])) {
+                    dead=true;
                 }
             }
+
             repaint();
         }
     }
@@ -63,8 +72,12 @@ public class Screen extends JPanel implements KeyListener {
         if (dead) return;
         int code = e.getKeyCode();
         System.out.println ("key: " + code ) ;
-        if (code == 38) b1.moveUp();
-        else if (code == 40) b1.moveDown();
+        if (code == 38) s1.moveUp();
+        if (code == 40) s1.moveDown();
+        if (code==32) {
+            p1.setPosition(s1.getX()+20, s1.getY());
+            p1.setVelocity(0, 3);
+        }
         repaint();
     }
 

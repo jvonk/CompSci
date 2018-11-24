@@ -25,7 +25,7 @@ public class Enemy {
     }
     public void moveLeft(){
         x-=1;
-        x%=800;
+        if (x<-400) x=800;
     }
     public void moveRight(){
         x+=1;
