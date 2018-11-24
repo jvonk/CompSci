@@ -7,8 +7,10 @@ public class Runner {
         //Create panel and add it to the frame
         Screen sc = new Screen();
         frame.add(sc);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        sc.animate();
  
     }
 }
