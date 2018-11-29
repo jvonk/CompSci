@@ -21,7 +21,6 @@ public class Enemy {
     }
 
     public void playSound() {
- 
         try {
             URL url = this.getClass().getClassLoader().getResource("sound/hit.wav");
             Clip clip = AudioSystem.getClip();
