@@ -3,7 +3,9 @@ import java.awt.event.KeyListener;
 import java.awt.Graphics;
 import java.awt.Color;
 import javax.swing.JPanel;
-
+import java.net.URL;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.Dimension;
 
 public class Screen extends JPanel implements KeyListener {
@@ -36,8 +38,24 @@ public class Screen extends JPanel implements KeyListener {
         return new Dimension(800,600);
     }
 
+ 
+    public void playSound() {
+        try {
+            URL url = this.getClass().getClassLoader().getResource("sound/cannon.wav");
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(url));
+            clip.start();
+        } catch (Exception exc) {
+            exc.printStackTrace(System.out);
+        }
+    }
+
     public void paintComponent (Graphics g) {
         super.paintComponent (g);
+        g.setColor(new Color(128,128,255));
+        g.fillRect(0, 0, 800, 300);
+        g.setColor(new Color(170,150,128));
+        g.fillRect(0, 300, 800, 300);
         g.setColor(Color.BLACK);
         if (win) {
             g.drawString("YOU WIN", 100, 100);
@@ -73,6 +91,7 @@ public class Screen extends JPanel implements KeyListener {
             }
             if (s1.getDead() || win) continue;
             p1.move();
+            int oldScore = score;
             score=0;
             for (int i = 0; i < enemies.length; i++) {
                 if (enemies[i].getDead()) {
@@ -86,6 +105,7 @@ public class Screen extends JPanel implements KeyListener {
                 enemies[i].checkCollision(p1);
                 s1.checkCollision(enemies[i]);
             }
+            if (oldScore<score) this.playSound();
             if (Math.random()<0.001)
                 counter++;
             repaint();

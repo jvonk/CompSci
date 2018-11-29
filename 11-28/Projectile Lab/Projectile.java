@@ -1,5 +1,7 @@
 import java.awt.Graphics;
-
+import java.net.URL;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.Color;
 
 public class Projectile {
@@ -26,6 +28,19 @@ public class Projectile {
         if (g) this.color = new Color(0,0,0);
         else this.color = new Color(128, 0, 0);
     }
+
+    public void playSound() {
+ 
+        try {
+            URL url = this.getClass().getClassLoader().getResource("sound/cannon.wav");
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(url));
+            clip.start();
+        } catch (Exception exc) {
+            exc.printStackTrace(System.out);
+        }
+    }
+    
     public void checkCollision (Projectile enemy) {
         //return (Math.hypot(this.x-enemy.x, this.y-enemy.y)<=20.0);
         if (x+width >= enemy.getX() && x <= enemy.getX() + enemy.getWidth()  &&  
@@ -81,6 +96,7 @@ public class Projectile {
     public void setPosition(int x, int y) {
         dead=false;
         if (!visibility) {
+            this.playSound();
             visibility=true;
             this.x = x;
             this.y = y;
