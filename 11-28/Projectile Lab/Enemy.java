@@ -39,8 +39,8 @@ public class Enemy {
             g.fillOval(x+width/6,y+height/6,width*2/3,height*2/3);
             g.setColor(color);
             g.fillOval(x+width/3,y+height/3,width/3,height/3);
-            if (p.getX()<-30) {
-                this.p=new Projectile(x+10, y, false);
+            if (p.getX()<-30 && Math.random()<0.007) {
+                this.p=new Projectile(x-20, y, false);
                 p.setVelocity(0, -2);
             }
         }
@@ -48,10 +48,14 @@ public class Enemy {
         p.move();
     }
     public void moveUp(){
+        if (Math.random()<0.3)
         y-=1;
+        if (y<-20) y=620;
     }
     public void moveDown(){
+        if (Math.random()<0.3)
         y+=1;
+        if (y>620) y=-20;
     }
     public void moveLeft(){
         x-=1;

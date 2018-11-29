@@ -31,13 +31,12 @@ public class Ship{
     public int getWidth() {return width;}
     public int getHeight() {return height;}
     public boolean getDead() {return dead;}
-    
+    public void setDead(boolean bool) {dead=bool;}
     public void drawMe(Graphics g) {
-		g.setColor(color);
+        g.setColor(color);
         g.fillRect(x,y,width,height);
         g.setColor(Color.black);
         g.fillRect(x+width/2, y+height/3, width*2/3, height/3);
-
     }
      
     public void moveUp(){

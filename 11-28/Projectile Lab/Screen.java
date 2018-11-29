@@ -11,15 +11,21 @@ public class Screen extends JPanel implements KeyListener {
     private Ship s1;
     private Enemy[] enemies; 
     private boolean win;
+    private int counter;
+    private int score;
+    private long time;
 
     public Screen() {
         p1 = new Projectile(50,500, true);
         s1 = new Ship(50,300);
         p1.setVelocity(80, 30);
         enemies = new Enemy[10];
+        score = 0;
+        counter = 0;
         win=false;
+        time=System.currentTimeMillis();
         for (int i = 0; i < 10; i++) {
-            enemies[i]=new Enemy((int)(Math.random()*800+400), (int)(Math.random()*600));
+            enemies[i]=new Enemy(700, (int)(Math.random()*600));
         }
         addKeyListener (this) ;
         setFocusable(true) ;
@@ -32,6 +38,7 @@ public class Screen extends JPanel implements KeyListener {
 
     public void paintComponent (Graphics g) {
         super.paintComponent (g);
+        g.setColor(Color.BLACK);
         if (win) {
             g.drawString("YOU WIN", 100, 100);
         } else if (s1.getDead()) {
@@ -46,7 +53,14 @@ public class Screen extends JPanel implements KeyListener {
 			}
 			//Draw ship
 			s1.drawMe(g);
-		}
+        }
+        g.setColor(Color.BLACK);
+        g.drawString("Score: "+score, 100, 120);
+        g.drawString("Time Left: "+0.001*(int)(100000-Math.round(System.currentTimeMillis()-time)), 100, 80);
+        if (System.currentTimeMillis()-time>100000) {
+            s1.setDead(true);
+            g.drawString("YOU LOSE", 100, 100);
+        }
     }
 
     public void animate() {
@@ -59,12 +73,21 @@ public class Screen extends JPanel implements KeyListener {
             }
             if (s1.getDead() || win) continue;
             p1.move();
+            score=0;
             for (int i = 0; i < enemies.length; i++) {
-                if (enemies[i].getDead()) continue;
-                enemies[i].moveLeft();
+                if (enemies[i].getDead()) {
+                    score++;
+                    continue;
+                }
+                if (2*((counter+i)%enemies.length)<enemies.length)
+                    enemies[i].moveUp();
+                else
+                    enemies[i].moveDown();
                 enemies[i].checkCollision(p1);
                 s1.checkCollision(enemies[i]);
             }
+            if (Math.random()<0.001)
+                counter++;
             repaint();
         }
     }
