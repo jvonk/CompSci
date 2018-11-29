@@ -27,7 +27,7 @@ public class Screen extends JPanel implements KeyListener {
         win=false;
         time=System.currentTimeMillis();
         for (int i = 0; i < 10; i++) {
-            enemies[i]=new Enemy(700, (int)(Math.random()*600));
+            enemies[i]=new Enemy((int)(Math.random()*840)+400, (int)(Math.random()*600));
         }
         addKeyListener (this) ;
         setFocusable(true) ;
@@ -98,6 +98,7 @@ public class Screen extends JPanel implements KeyListener {
                     score++;
                     continue;
                 }
+                enemies[i].moveLeft();
                 if (2*((counter+i)%enemies.length)<enemies.length)
                     enemies[i].moveUp();
                 else
