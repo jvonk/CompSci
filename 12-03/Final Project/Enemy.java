@@ -9,12 +9,12 @@ import javax.sound.sampled.Clip;
 import java.awt.Dimension;
 
 public class Enemy {
-    private int initX, x, initY, y, width, height;
+    private int initX, x, initY, y, width, height, vel;
     private Color color;
     private boolean dead = false;
     private Projectile p;
 
-    public Enemy(int x, int y) {
+    public Enemy(int x, int y, int inVel) {
         this.initX = x;
         this.x = this.initX;
 
@@ -24,8 +24,9 @@ public class Enemy {
         this.width = 40;
         this.height = 40;
 
+        this.vel=inVel; 
         this.p = new Projectile(x - 20, y, false);
-        p.setVelocity(0, -2);
+        p.setVelocity(0, -2*vel);
 
         this.color = new Color(255, 0, 0);
     }
@@ -109,7 +110,7 @@ public class Enemy {
             g.fillOval(x + width / 3, y + height / 3, width / 3, height / 3);
             if (p.getX() < -30 && Math.random() < 0.007) {
                 this.p = new Projectile(x - 20, y, false);
-                p.setVelocity(0, -2);
+                p.setVelocity(0, -2*vel);
             }
         }
         p.drawMe(g);
@@ -131,7 +132,7 @@ public class Enemy {
     }
 
     public boolean moveLeft() {
-        x -= 1;
+        x -= vel;
         if (x < -20) {
             x = 800;
             y = (int) (Math.random() * 600);

@@ -72,7 +72,12 @@ public class Ship {
             exc.printStackTrace(System.out);
         }
     }
-
+    public int getLives() {
+        return lives;
+    }
+    public void setLives(int in) {
+        lives=in;
+    }
     public void setDead(boolean bool) {
         if (bool) {
             lives--;
