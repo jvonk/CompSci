@@ -20,6 +20,8 @@ public class Screen extends JPanel implements KeyListener {
 
     public Screen() {
         p1 = new Projectile(50, 500, true);
+        p1.setVelocity(80, 30);
+
         //projectiles=new Projectile[] {new Projectile(50, 500, true)};
         debris=new Debris[100];
         for (int i = 0; i < debris.length; i++) {
@@ -86,6 +88,8 @@ public class Screen extends JPanel implements KeyListener {
         g.setColor(Color.BLACK);
         if (level == 3) {
             g.drawString("YOU WIN", 100, 100);
+            s1.drawMe(g);
+            p1.drawMe(g);
         } else if (s1.getDead()) {
             g.drawString("YOU LOSE", 100, 100);
         } else {
@@ -105,7 +109,7 @@ public class Screen extends JPanel implements KeyListener {
         g.drawString("Score: " + score, 100, 120);
         g.drawString("Time Left: " + 0.001 * (int) (1000000 - Math.round(System.currentTimeMillis() - time)), 100, 80);
         if (System.currentTimeMillis() - time > 1000000) {
-            s1.setDead(true);
+            s1.setLives(-1);
             g.drawString("YOU LOSE", 100, 100);
         }
     }
@@ -147,9 +151,7 @@ public class Screen extends JPanel implements KeyListener {
                         projectiles[j].setDead(true);
                     }
                 }*/
-                if (enemies[i].checkCollision(p1)) {
-                    p1.setDead(true);
-                }
+                enemies[i].checkCollision(p1);
                 s1.checkCollision(enemies[i]);
             }
 
@@ -165,7 +167,17 @@ public class Screen extends JPanel implements KeyListener {
         }
     }
     public void lose() {
-        level=0;
+        if (s1.getLives()==0) {
+            level=0;
+            score=0;
+            s1.setLives(3);
+        } else {
+            level--;
+        }
+        s1.setY(300);
+        s1.setDead(false);
+        p1 = new Projectile(50, 500, true);
+        p1.setVelocity(80, 30);    
         this.win();
     }
     public void win() {

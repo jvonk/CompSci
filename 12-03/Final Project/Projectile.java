@@ -120,12 +120,12 @@ public class Projectile {
     }
 
     public void setPosition(int x, int y) {
-        dead = false;
-        if (!visibility) {
+        if (!visibility || dead) {
             this.playSound();
             visibility = true;
             this.x = x;
             this.y = y;
+            dead = false;
         }
     }
 

@@ -50,6 +50,10 @@ public class Ship {
         return y;
     }
 
+    public void setY(int in) {
+        y=in;
+    }
+
     public int getWidth() {
         return width;
     }
