@@ -9,12 +9,12 @@ import javax.sound.sampled.Clip;
 import java.awt.Dimension;
 
 public class Enemy {
-    private int initX, x, initY, y, width, height, vel;
+    private double initX, x, initY, y, width, height, vel;
     private Color color;
     private boolean dead = false;
     private Projectile p;
 
-    public Enemy(int x, int y, int inVel) {
+    public Enemy(double x, double y, double inVel) {
         this.initX = x;
         this.x = this.initX;
 
@@ -25,8 +25,8 @@ public class Enemy {
         this.height = 40;
 
         this.vel=inVel; 
-        this.p = new Projectile(x - 20, y, false);
-        p.setVelocity(0, -2*vel);
+        this.p = new Projectile((int)(x - 20), (int)(y), false);
+        p.setVelocity(0, -1);
 
         this.color = new Color(255, 0, 0);
     }
@@ -61,19 +61,19 @@ public class Enemy {
     public void setDead(boolean in) {
         dead=in;
     }
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
@@ -92,25 +92,25 @@ public class Enemy {
         return p.getY();
     }
 
-    public int getPWidth() {
+    public double getPWidth() {
         return p.getWidth();
     }
 
-    public int getPHeight() {
+    public double getPHeight() {
         return p.getHeight();
     }
 
     public void drawMe(Graphics g) {
         if (!dead) {
             g.setColor(color);
-            g.fillOval(x, y, width, height);
+            g.fillOval((int)(x), (int)(y), (int)(width), (int)(height));
             g.setColor(Color.WHITE);
-            g.fillOval(x + width / 6, y + height / 6, width * 2 / 3, height * 2 / 3);
+            g.fillOval((int)(x + width / 6), (int)(y + height / 6), (int)(width * 2 / 3), (int)(height * 2 / 3));
             g.setColor(color);
-            g.fillOval(x + width / 3, y + height / 3, width / 3, height / 3);
+            g.fillOval((int)(x + width / 3), (int)(y + height / 3), (int)(width / 3), (int)(height / 3));
             if (p.getX() < -30 && Math.random() < 0.007) {
-                this.p = new Projectile(x - 20, y, false);
-                p.setVelocity(0, -2*vel);
+                this.p = new Projectile((int)(x - 20), (int)(y), false);
+                p.setVelocity(0, -1);
             }
         }
         p.drawMe(g);
@@ -135,7 +135,7 @@ public class Enemy {
         x -= vel;
         if (x < -20) {
             x = 800;
-            y = (int) (Math.random() * 600);
+            y = (double) (Math.random() * 600);
             return true;
         }
         return false;

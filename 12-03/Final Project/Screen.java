@@ -17,6 +17,7 @@ public class Screen extends JPanel implements KeyListener {
     private int counter, score, level;
     private long time;
     private Debris[] debris;
+    private int[][][] levels;
 
     public Screen() {
         p1 = new Projectile(50, 500, true);
@@ -36,17 +37,20 @@ public class Screen extends JPanel implements KeyListener {
         win = false;
 
         time = System.currentTimeMillis();
-
-        level1 = new Enemy[] { new Enemy(700, 200, 1), new Enemy(600, 300, 1), new Enemy(700, 400, 1) };
-        level2 = new Enemy[] { new Enemy(600, 200, 2), new Enemy(500, 300, 2), new Enemy(600, 400, 2), new Enemy(700, 100, 2),
-                new Enemy(700, 300, 2), new Enemy(700, 500, 2) };
+        levels = new int[][][] {new int[][] { new int[] {700, 200}, new int[] {600, 300}, new int[] {700, 400}}, new int[][] {new int[] {600, 200}, new int[] {500, 300}, new int[] {600, 400}, new int[] {700, 100}, new int[] {700, 300}, new int[] {700, 500}}, new int[0][0]};
         level = 1;
-        enemies = level1.clone();
+        enemies = convert(levels[0]);
 
         addKeyListener(this);
         setFocusable(true);
     }
-
+    public Enemy[] convert (int[][] in) {
+        Enemy[] a = new Enemy[in.length];
+        for (int i = 0; i < in.length; i++) {
+            a[i]=new Enemy(in[i][0], in[i][1], 0.05*in.length);
+        }
+        return a;
+    }
     public Dimension getPreferredSize() {
         return new Dimension(800, 600); // Sets the size of the panel
     }
@@ -147,11 +151,12 @@ public class Screen extends JPanel implements KeyListener {
                 }
                 /*
                 for (int j = 0; j < projectiles.length; j++) {
-                    if (enemies[i].checkCollision(projectiles[j])) {
-                        projectiles[j].setDead(true);
-                    }
+                    
                 }*/
-                enemies[i].checkCollision(p1);
+                if (enemies[i].checkCollision(p1)) {
+                    p1.setDead(true);
+                }
+                //enemies[i].checkCollision(p1);
                 s1.checkCollision(enemies[i]);
             }
 
@@ -174,20 +179,19 @@ public class Screen extends JPanel implements KeyListener {
         } else {
             level--;
         }
-        s1.setY(300);
-        s1.setDead(false);
-        p1 = new Projectile(50, 500, true);
-        p1.setVelocity(80, 30);    
         this.win();
     }
     public void win() {
+        s1.setY(300);
+        p1 = new Projectile(50, 500, true);
+        p1.setVelocity(80, 30);
         level++;
         if (level>3) level=3;
         if (level<1) level=1;
         if (level == 1) {
-            enemies = new Enemy[] { new Enemy(700, 200, 1), new Enemy(600, 300, 1), new Enemy(700, 400, 1) };
+            enemies = convert(levels[0]);
         } else if (level == 2) {
-            enemies = level2.clone();
+            enemies = convert(levels[1]);
         } else if (level==3) {
             enemies = new Enemy[0];
         }

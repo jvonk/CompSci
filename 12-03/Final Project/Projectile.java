@@ -51,9 +51,12 @@ public class Projectile {
         // return (Math.hypot(this.x-enemy.x, this.y-enemy.y)<=20.0);
         if (x + width >= enemy.getX() && x <= enemy.getX() + enemy.getWidth() && y + height >= enemy.getY()
                 && y <= enemy.getY() + enemy.getHeight()) {
-            dead = true;
-            enemy.setDead(true);
-                }
+            if (good) {
+                enemy.setDead(true);
+            } else {
+                dead = true;
+            }
+        }
     }
 
     public void drawMe(Graphics g) {
