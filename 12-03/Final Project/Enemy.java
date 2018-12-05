@@ -13,6 +13,7 @@ public class Enemy {
     private Color color;
     private boolean dead = false;
     private Projectile p;
+    private int lives;
 
     public Enemy(double x, double y, double inVel) {
         this.initX = x;
@@ -23,6 +24,13 @@ public class Enemy {
 
         this.width = 40;
         this.height = 40;
+        if (inVel==2) {
+            this.width=100;
+            this.height=100;
+            this.lives=3;
+        } else {
+            this.lives = 0;
+        }
 
         this.vel=inVel; 
         this.p = new Projectile((int)(x - 20), (int)(y), false);
@@ -59,7 +67,12 @@ public class Enemy {
         return dead;
     }
     public void setDead(boolean in) {
-        dead=in;
+        if (in) {
+            lives--;
+            if (lives<1) dead=true;
+        } else {
+            dead=false;
+        }
     }
     public double getX() {
         return x;
@@ -119,14 +132,14 @@ public class Enemy {
 
     public void moveUp() {
         if (Math.random() < 0.3)
-            y -= 1;
+            y -= this.vel==2?3:1;
         if (y < -20)
             y = 620;
     }
 
     public void moveDown() {
         if (Math.random() < 0.3)
-            y += 1;
+            y += this.vel==2?2.5:1;
         if (y > 620)
             y = -20;
     }

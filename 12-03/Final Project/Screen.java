@@ -37,7 +37,7 @@ public class Screen extends JPanel implements KeyListener {
         win = false;
 
         time = System.currentTimeMillis();
-        levels = new int[][][] {new int[][] { new int[] {700, 200}, new int[] {600, 300}, new int[] {700, 400}}, new int[][] {new int[] {600, 200}, new int[] {500, 300}, new int[] {600, 400}, new int[] {700, 100}, new int[] {700, 300}, new int[] {700, 500}}, new int[0][0]};
+        levels = new int[][][] {new int[][] { new int[] {700, 200}, new int[] {600, 300}, new int[] {700, 400}}, new int[][] {new int[] {600, 200}, new int[] {500, 300}, new int[] {600, 400}, new int[] {700, 100}, new int[] {700, 300}, new int[] {700, 500}}, new int[][] {new int[] {700, 300}}, new int[0][0]};
         level = 1;
         enemies = convert(levels[0]);
 
@@ -47,7 +47,7 @@ public class Screen extends JPanel implements KeyListener {
     public Enemy[] convert (int[][] in) {
         Enemy[] a = new Enemy[in.length];
         for (int i = 0; i < in.length; i++) {
-            a[i]=new Enemy(in[i][0], in[i][1], 0.05*in.length);
+            a[i]=new Enemy(in[i][0], in[i][1], (in.length==1)?2:0.05*in.length);
         }
         return a;
     }
@@ -78,6 +78,11 @@ public class Screen extends JPanel implements KeyListener {
             g.fillRect(0, 300, 800, 300);
             g.setColor(new Color(255, 150, 128));
             g.fillRect(0, 0, 800, 300);
+        } else if (level==3) {
+            g.setColor(new Color(100, 200, 255));
+            g.fillRect(0, 0, 800, 300);
+            g.setColor(new Color(0, 150, 128));
+            g.fillRect(0, 300, 800, 300);
         } else {
             g.setColor(new Color(100, 0, 255));
             g.fillRect(0, 0, 800, 300);
@@ -90,10 +95,9 @@ public class Screen extends JPanel implements KeyListener {
         }
 
         g.setColor(Color.BLACK);
-        if (level == 3) {
+        if (level == levels.length) {
             g.drawString("YOU WIN", 100, 100);
             s1.drawMe(g);
-            p1.drawMe(g);
         } else if (s1.getDead()) {
             g.drawString("YOU LOSE", 100, 100);
         } else {
@@ -186,15 +190,9 @@ public class Screen extends JPanel implements KeyListener {
         p1 = new Projectile(50, 500, true);
         p1.setVelocity(80, 30);
         level++;
-        if (level>3) level=3;
+        if (level>levels.length) level=3;
         if (level<1) level=1;
-        if (level == 1) {
-            enemies = convert(levels[0]);
-        } else if (level == 2) {
-            enemies = convert(levels[1]);
-        } else if (level==3) {
-            enemies = new Enemy[0];
-        }
+        enemies = convert(levels[level-1]);
     }
 
     public void keyPressed(KeyEvent e) {
