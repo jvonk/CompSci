@@ -302,7 +302,7 @@ public class Screen extends JPanel implements KeyListener {
 
     public void win() {
         s1.setY(300);
-        p1 = new Projectile(50, 500, true);
+        p1 = new Projectile(50, 500, true);  
         p1.setVelocity(80, 30);
 
         if (level < 1)
@@ -311,7 +311,7 @@ public class Screen extends JPanel implements KeyListener {
             level=numLevels;
             enemies = convert(levels.length-1);
         } else if (level >= levels.length-1) {
-            int len = (int)(Math.random()*(level/5)+1);
+            int len = (int)(Math.random()*(level/3)+1);
             Enemy[] temp = new Enemy[len];
             int count = 0;
             for (int i = 0; i < len; i++) {
