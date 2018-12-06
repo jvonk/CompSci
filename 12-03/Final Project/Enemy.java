@@ -7,6 +7,8 @@ import java.net.URL;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 public class Enemy {
     private double initX, x, initY, y, width, height, vel;
@@ -115,12 +117,15 @@ public class Enemy {
 
     public void drawMe(Graphics g) {
         if (!dead) {
-            g.setColor(color);
-            g.fillOval((int)(x), (int)(y), (int)(width), (int)(height));
-            g.setColor(Color.WHITE);
-            g.fillOval((int)(x + width / 6), (int)(y + height / 6), (int)(width * 2 / 3), (int)(height * 2 / 3));
-            g.setColor(color);
-            g.fillOval((int)(x + width / 3), (int)(y + height / 3), (int)(width / 3), (int)(height / 3));
+
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(color);
+            g2.fillOval((int)(x), (int)(y), (int)(width), (int)(height));
+            g2.setColor(Color.WHITE);
+            g2.fillOval((int)(x + width / 6), (int)(y + height / 6), (int)(width * 2 / 3), (int)(height * 2 / 3));
+            g2.setColor(color);
+            g2.fillOval((int)(x + width / 3), (int)(y + height / 3), (int)(width / 3), (int)(height / 3));
             if (p.getX() < -30 && Math.random() < 0.007) {
                 this.p = new Projectile((int)(x - 20), (int)(y), false);
                 p.setVelocity(0, -vel*2);
