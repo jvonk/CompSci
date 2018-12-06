@@ -93,9 +93,10 @@ public class Ship {
 
     public void drawMe(Graphics g) {
         g.setColor(new Color(255, 0, 0));
-        for (int i = 0; i < lives; i++)
-            g.fillRect(50 * (i + 1), 20, 30, 30);
-
+        for (int i = 0; i < lives; i++) {
+            //0, 10, 10, 0, 20, 10, 30, 0, 40, 10, 30, 30
+            g.fillPolygon(new int[] {20+50*i, 30+50*i, 40+50*i, 50+50*i, 60+50*i, 40+50*i}, new int[] {30, 20, 30, 20, 30, 50}, 6);
+        }
         g.setColor(color);
         g.fillRect(x, y, width, height);
 
@@ -104,12 +105,14 @@ public class Ship {
     }
 
     public void moveUp() {
-        if (y >= 5)
+        if (y >= 5) {
             y -= 5;
+        }
     }
 
     public void moveDown() {
-        if (y <= 595)
+        if (y <= 595-height) {
             y += 5;
+        }
     }
 }

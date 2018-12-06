@@ -20,9 +20,16 @@ public class Debris {
         int temp = (int)(Math.random()*255);
         this.color = new Color(temp, temp, temp);
     }
-    public void drawMe(Graphics g) {
+    public void drawMe(Graphics g, int level) {
         g.setColor(color);
         g.fillRect(x, y, length, 3);
+        if (level>2) {
+            g.fillOval((x+300)%800, 600-y, length/3, length/3);
+        }
+        if (level>3) {
+            g.setColor(new Color(130, 150, 255));
+            g.fillRect(y*4/3, (800-x)%600, length/8, length/4);
+        }
         x=(x+xVel+800)%800;
         y=(y+yVel+600)%600;
     }

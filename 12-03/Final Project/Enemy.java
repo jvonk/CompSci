@@ -24,7 +24,7 @@ public class Enemy {
 
         this.width = 40;
         this.height = 40;
-        if (inVel==2) {
+        if (inVel>1.4) {
             this.width=100;
             this.height=100;
             this.lives=3;
@@ -133,14 +133,14 @@ public class Enemy {
     public void moveUp() {
         if (Math.random() < 0.3)
             y -= this.vel==2?3:1;
-        if (y < -20)
+        if (y < 0)
             y = 620;
     }
 
     public void moveDown() {
         if (Math.random() < 0.3)
             y += this.vel==2?2.5:1;
-        if (y > 620)
+        if (y > 600-height)
             y = -20;
     }
 
