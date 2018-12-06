@@ -19,8 +19,10 @@ public class Screen extends JPanel implements KeyListener {
     private Debris[] debris;
     private int[][][] levels;
     private double[][] speeds;
+    private int numLevels;
 
     public Screen() {
+        numLevels=50;
         p1 = new Projectile(50, 500, true);
         p1.setVelocity(80, 30);
 
@@ -44,6 +46,8 @@ public class Screen extends JPanel implements KeyListener {
             new double[] {0.3},
             new double[] {1.7},
             new double[] {0.25},
+            new double[] {0.5, 0.5, 0.5, 0.6, 0.6, 0.6, 0.7, 0.7, 0.7, 0.8, 0.8, 0.8, 0.9, 0.9, 0.9},
+            new double[] {0.7, 1.1, 0.7},
             new double[] {0.0},
         };
         levels = new int[][][] {
@@ -76,6 +80,26 @@ public class Screen extends JPanel implements KeyListener {
                               new int[] { 1300, 100 },
                               new int[] { 1300, 300 },
                               new int[] { 1300, 500 } },
+
+                              new int[][] { new int[] { 600, 100 },
+                              new int[] { 600, 300 },
+                              new int[] { 600, 500 },
+                              new int[] { 1100, 100 },
+                              new int[] { 1100, 300 },
+                              new int[] { 1100, 500 },
+                              new int[] { 1600, 100 },
+                              new int[] { 1600, 300 },
+                              new int[] { 1600, 500 },
+                              new int[] { 2100, 100 },
+                              new int[] { 2100, 300 },
+                              new int[] { 2100, 500 },
+                              new int[] { 2600, 100 },
+                              new int[] { 2600, 300 },
+                              new int[] { 2600, 500 } },
+
+                new int[][] { new int[] { 800, 100 },
+                              new int[] { 800, 300 },
+                              new int[] { 800, 500 } },
 
                 new int[0][0]
             };
@@ -181,7 +205,7 @@ public class Screen extends JPanel implements KeyListener {
         }
 
         g.setColor(Color.BLACK);
-        if (level == levels.length) {
+        if (level == numLevels) {
             g.drawString("YOU WIN", 100, 100);
             s1.drawMe(g);
         } else if (s1.getDead()) {
@@ -207,8 +231,8 @@ public class Screen extends JPanel implements KeyListener {
             s1.drawMe(g);
         }
         g.setColor(Color.BLACK);
-        g.drawString("Score: " + score, 100, 120);
-        g.drawString("Level: " + level, 100, 140);
+        g.drawString("Score: " + score+"/"+enemies.length, 100, 120);
+        g.drawString("Level: " + level+"/"+(numLevels), 100, 140);
     }
 
     public void animate() {
@@ -280,12 +304,28 @@ public class Screen extends JPanel implements KeyListener {
         s1.setY(300);
         p1 = new Projectile(50, 500, true);
         p1.setVelocity(80, 30);
-        level++;
-        if (level > levels.length)
-            level = levels.length;
+
         if (level < 1)
             level = 1;
-        enemies = convert(level - 1);
+        if (level>=numLevels) {
+            level=numLevels;
+            enemies = convert(levels.length-1);
+        } else if (level >= levels.length-1) {
+            int len = (int)(Math.random()*(level/5)+1);
+            Enemy[] temp = new Enemy[len];
+            int count = 0;
+            for (int i = 0; i < len; i++) {
+                double t = Math.random()*0.8+0.4;
+                temp[i]=new Enemy(700.0+Math.random()*700+count, Math.random()*600, t);
+                count+=(int)(Math.pow(t, 3)*(600-level*10));
+            } 
+            enemies=temp;
+            level++;
+        } else {
+            level++;
+            enemies = convert(level - 1);
+        }
+        
     }
 
     public void keyPressed(KeyEvent e) {

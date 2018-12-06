@@ -24,7 +24,7 @@ public class Enemy {
 
         this.width = 40;
         this.height = 40;
-        if (inVel>1.4) {
+        if (inVel>1) {
             this.width=100;
             this.height=100;
             this.lives=3;
@@ -34,7 +34,7 @@ public class Enemy {
 
         this.vel=inVel; 
         this.p = new Projectile((int)(x - 20), (int)(y), false);
-        p.setVelocity(0, -1);
+        p.setVelocity(0, -vel*2);
 
         this.color = new Color(255, 0, 0);
     }
@@ -123,7 +123,7 @@ public class Enemy {
             g.fillOval((int)(x + width / 3), (int)(y + height / 3), (int)(width / 3), (int)(height / 3));
             if (p.getX() < -30 && Math.random() < 0.007) {
                 this.p = new Projectile((int)(x - 20), (int)(y), false);
-                p.setVelocity(0, -1);
+                p.setVelocity(0, -vel*2);
             }
         }
         p.drawMe(g);
