@@ -7,6 +7,8 @@ import java.net.URL;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 public class Debris {
     private int x, y, xVel, yVel, length;
@@ -20,7 +22,7 @@ public class Debris {
         int temp = (int)(Math.random()*255);
         this.color = new Color(temp, temp, temp);
     }
-    public void drawMe(Graphics g, int level) {
+    public void drawMe(Graphics2D g, int level) {
         g.setColor(color);
         g.fillRect(x, y, length, 3);
         if (level>2) {

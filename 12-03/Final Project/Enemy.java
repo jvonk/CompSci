@@ -115,17 +115,15 @@ public class Enemy {
         return p.getHeight();
     }
 
-    public void drawMe(Graphics g) {
+    public void drawMe(Graphics2D g) {
         if (!dead) {
 
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(color);
-            g2.fillOval((int)(x), (int)(y), (int)(width), (int)(height));
-            g2.setColor(Color.WHITE);
-            g2.fillOval((int)(x + width / 6), (int)(y + height / 6), (int)(width * 2 / 3), (int)(height * 2 / 3));
-            g2.setColor(color);
-            g2.fillOval((int)(x + width / 3), (int)(y + height / 3), (int)(width / 3), (int)(height / 3));
+            g.setColor(color);
+            g.fillOval((int)(x), (int)(y), (int)(width), (int)(height));
+            g.setColor(Color.WHITE);
+            g.fillOval((int)(x + width / 6), (int)(y + height / 6), (int)(width * 2 / 3), (int)(height * 2 / 3));
+            g.setColor(color);
+            g.fillOval((int)(x + width / 3), (int)(y + height / 3), (int)(width / 3), (int)(height / 3));
             if (p.getX() < -30 && Math.random() < 0.007) {
                 this.p = new Projectile((int)(x - 20), (int)(y), false);
                 p.setVelocity(0, -vel*2);

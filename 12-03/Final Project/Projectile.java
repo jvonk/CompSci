@@ -7,6 +7,8 @@ import java.net.URL;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 public class Projectile {
     private double x, y, initX, initY, initXVel, xVel, initYVel, yVel, gravity, time;
@@ -59,7 +61,7 @@ public class Projectile {
         }
     }
 
-    public void drawMe(Graphics g) {
+    public void drawMe(Graphics2D g) {
         if (!dead) {
             g.setColor(color);
             g.fillOval((int) (Math.round(x)), (int) (Math.round(y)), width, height);

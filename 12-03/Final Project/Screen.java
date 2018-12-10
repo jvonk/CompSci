@@ -7,6 +7,8 @@ import java.net.URL;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 public class Screen extends JPanel implements KeyListener {
     private Projectile p1;
@@ -137,6 +139,9 @@ public class Screen extends JPanel implements KeyListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         if (level == 1) {
             g.setColor(new Color(135, 206, 235));
             g.fillRect(0, 0, 800, 300);
@@ -145,17 +150,17 @@ public class Screen extends JPanel implements KeyListener {
             g.setColor(new Color(252, 212, 64));
             g.fillOval(50, 50, 100, 100);
             int x = (int)(0.1*(System.currentTimeMillis()-time))%800;
-            g.setColor(new Color(220, 240, 255));
-            g.fillOval((2*x)%1200+25, 100, 200, 100);
-            g.fillOval((2*x)%1200+125, 100, 200, 100);
-            g.fillOval((2*x)%1200+75, 50, 200, 100);
-            g.setColor(new Color(255, 255, 255));
-            g.fillOval((3*x)%1200-600+225, 150, 200, 100);
-            g.fillOval((3*x)%1200-600+325, 150, 200, 100);
-            g.fillOval((3*x)%1200-600+275, 100, 200, 100);
-            g.fillOval((3*x)%1200-600+325, 125, 200, 100);
-            g.fillOval((3*x)%1200-600+425, 125, 200, 100);
-            g.fillOval((3*x)%1200-600+375, 75, 200, 100);
+            g2.setColor(new Color(220, 240, 255));
+            g2.fillOval((2*x)%1200+25, 100, 200, 100);
+            g2.fillOval((2*x)%1200+125, 100, 200, 100);
+            g2.fillOval((2*x)%1200+75, 50, 200, 100);
+            g2.setColor(new Color(255, 255, 255));
+            g2.fillOval((3*x)%1200-600+225, 150, 200, 100);
+            g2.fillOval((3*x)%1200-600+325, 150, 200, 100);
+            g2.fillOval((3*x)%1200-600+275, 100, 200, 100);
+            g2.fillOval((3*x)%1200-600+325, 125, 200, 100);
+            g2.fillOval((3*x)%1200-600+425, 125, 200, 100);
+            g2.fillOval((3*x)%1200-600+375, 75, 200, 100);
         } else if (level == 2) {
             g.setColor(new Color(255, 128, 255));
             g.fillRect(0, 300, 800, 300);
@@ -208,39 +213,39 @@ public class Screen extends JPanel implements KeyListener {
         }
 
         for (int i = 0; i < debris.length; i++) {
-            debris[i].drawMe(g, level);
+            debris[i].drawMe(g2, level);
         }
 
-        g.setColor(Color.BLACK);
+        g2.setColor(Color.BLACK);
         if (level == numLevels) {
-            g.drawString("YOU WIN", 100, 100);
-            s1.drawMe(g);
+            g2.drawString("YOU WIN", 100, 100);
+            s1.drawMe(g2);
         } else if (s1.getDead()) {
-            g.drawString("YOU LOSE", 100, 100);
+            g2.drawString("YOU LOSE", 100, 100);
         } else {
             boolean win = true;
             for (int i = 0; i < enemies.length; i++) {
-                enemies[i].drawMe(g);
+                enemies[i].drawMe(g2);
                 if (!enemies[i].getDead())
                     win = false;
             }
-            heart.drawMe(g);
+            heart.drawMe(g2);
             if (win)
                 this.win();
-            p1.drawMe(g);
-            g.drawString("Time Left: " + (int) (1000000 - Math.round(System.currentTimeMillis() - time)), 100, 80);
+            p1.drawMe(g2);
+            g2.drawString("Time Left: " + (int) (1000000 - Math.round(System.currentTimeMillis() - time)), 100, 80);
             if (System.currentTimeMillis() - time > 1000000) {
                 s1.setLives(-1);
-                g.drawString("YOU LOSE", 100, 100);
+                g2.drawString("YOU LOSE", 100, 100);
             }
             /*
-             * for (int i = 0; i < projectiles.length; i++) { projectiles[i].drawMe(g); }
+             * for (int i = 0; i < projectiles.length; i++) { projectiles[i].drawMe(g2); }
              */
-            s1.drawMe(g);
+            s1.drawMe(g2);
         }
-        g.setColor(Color.BLACK);
-        g.drawString("Score: " + score+"/"+enemies.length, 100, 120);
-        g.drawString("Level: " + level+"/"+(numLevels), 100, 140);
+        g2.setColor(Color.BLACK);
+        g2.drawString("Score: " + score+"/"+enemies.length, 100, 120);
+        g2.drawString("Level: " + level+"/"+(numLevels), 100, 140);
     }
 
     public void animate() {

@@ -7,6 +7,8 @@ import java.net.URL;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 
 public class Ship {
@@ -97,7 +99,7 @@ public class Ship {
         }
     }
 
-    public void drawMe(Graphics g) {
+    public void drawMe(Graphics2D g) {
         g.setColor(new Color(255, 0, 0));
         for (int i = 0; i < lives; i++) {
             //0, 10, 10, 0, 20, 10, 30, 0, 40, 10, 30, 30
