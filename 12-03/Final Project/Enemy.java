@@ -36,7 +36,7 @@ public class Enemy {
 
         this.vel=inVel; 
         this.p = new Projectile((int)(x - 20), (int)(y), false);
-        p.setVelocity(0, -vel*2);
+        p.setVelocity(0, -vel*3);
 
         this.color = new Color(255, 0, 0);
     }

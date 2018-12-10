@@ -33,7 +33,7 @@ public class Projectile {
         if (g)
             this.color = new Color(0, 0, 0);
         else
-            this.color = new Color(128, 0, 0);
+            this.color = new Color(255, 100, 100);
     }
 
     public void playSound() {

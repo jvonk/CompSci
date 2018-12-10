@@ -41,6 +41,12 @@ public class Ship {
             enemy.setPDead(true);
         }
     }
+    public void checkCollision(Heart enemy) {
+        if (x + width >= enemy.getX() && x <= enemy.getX() + enemy.getWidth() && y + height >= enemy.getY()
+                && y <= enemy.getY() + enemy.getHeight()) {
+            this.lives++;
+        }
+    }
 
     public int getX() {
         return x;

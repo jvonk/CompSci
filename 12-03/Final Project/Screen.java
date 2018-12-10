@@ -19,6 +19,7 @@ public class Screen extends JPanel implements KeyListener {
     private Debris[] debris;
     private int[][][] levels;
     private double[][] speeds;
+    private Heart heart;
     private int numLevels;
 
     public Screen() {
@@ -32,6 +33,7 @@ public class Screen extends JPanel implements KeyListener {
             debris[i] = new Debris((int) (Math.random() * 800), (int) (Math.random() * 600),
                     (int) (Math.random() * 5 - 7), 0);
         }
+        heart = new Heart(850, 300, 1);
 
         s1 = new Ship(50, 300);
 
@@ -193,10 +195,15 @@ public class Screen extends JPanel implements KeyListener {
             g.fillRect(0, 0, 800, 300);
             g.setColor(new Color(120, 60, 255));
             g.fillRect(0, 300, 800, 300);
-        } else {
+        } else if (level==numLevels) {
             g.setColor(new Color(106,197,244));
             g.fillRect(0, 0, 800, 300);
             g.setColor(new Color(252,81,11));
+            g.fillRect(0, 300, 800, 300);
+        } else {
+            g.setColor(new Color((level*143)%255,(level*33+212)%255,(level*45+122)%255));
+            g.fillRect(0, 0, 800, 300);
+            g.setColor(new Color((level*55+32)%255,(level*78+180)%255,(level*91+30)%255));
             g.fillRect(0, 300, 800, 300);
         }
 
@@ -217,6 +224,7 @@ public class Screen extends JPanel implements KeyListener {
                 if (!enemies[i].getDead())
                     win = false;
             }
+            heart.drawMe(g);
             if (win)
                 this.win();
             p1.drawMe(g);
@@ -252,6 +260,14 @@ public class Screen extends JPanel implements KeyListener {
             int oldScore = score;
             score = 0;
             int oldLives = s1.getLives();
+            if (2 * ((counter) % enemies.length) < enemies.length) {
+                heart.moveUp();
+            } else {
+                heart.moveDown();
+            }
+            heart.moveLeft();
+            s1.checkCollision(heart);
+
             for (int i = 0; i < enemies.length; i++) {
                 if (enemies[i].getDead()) {
                     score++;
@@ -265,11 +281,7 @@ public class Screen extends JPanel implements KeyListener {
                 } else {
                     enemies[i].moveDown();
                 }
-                /*
-                 * for (int j = 0; j < projectiles.length; j++) {
-                 * 
-                 * }
-                 */
+
                 if (enemies[i].checkCollision(p1)) {
                     p1.setDead(true);
                 }
@@ -277,8 +289,10 @@ public class Screen extends JPanel implements KeyListener {
                 s1.checkCollision(enemies[i]);
             }
 
-            if (oldLives != s1.getLives()) {
+            if (oldLives > s1.getLives()) {
                 this.lose();
+            } else if (oldLives < s1.getLives()) {
+                heart = new Heart(850, 300, 1);
             }
             if (oldScore < score) {
                 this.playSound("cannon");
@@ -306,18 +320,19 @@ public class Screen extends JPanel implements KeyListener {
         p1.setVelocity(80, 30);
 
         if (level < 1)
-            level = 1;
+            level = 0;
         if (level>=numLevels) {
             level=numLevels;
             enemies = convert(levels.length-1);
         } else if (level >= levels.length-1) {
-            int len = (int)(Math.random()*(level/3)+1);
+            int len = (int)(Math.random()*level+1);
             Enemy[] temp = new Enemy[len];
             int count = 0;
             for (int i = 0; i < len; i++) {
-                double t = Math.random()*0.8+0.4;
+                double t = Math.pow(Math.random()*0.8+0.4, 2);
                 temp[i]=new Enemy(700.0+Math.random()*700+count, Math.random()*600, t);
-                count+=(int)(Math.pow(t, 3)*(600-level*10));
+                int change = (int)(Math.pow(t, 3)*(650-(level)*8));
+                count+=t>1?3*change:change;
             } 
             enemies=temp;
             level++;
@@ -325,6 +340,7 @@ public class Screen extends JPanel implements KeyListener {
             level++;
             enemies = convert(level - 1);
         }
+        heart=new Heart(Math.random()*800+800, Math.random()*600, 4);
         
     }
 
