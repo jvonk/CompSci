@@ -296,11 +296,10 @@ public class Screen extends JPanel implements KeyListener {
 
             if (oldLives > s1.getLives()) {
                 this.lose();
+                this.playSound("oof");
             } else if (oldLives < s1.getLives()) {
                 heart = new Heart(850, 300, 1);
-            }
-            if (oldScore < score) {
-                this.playSound("cannon");
+				this.playSound("heart");
             }
             if (Math.random() < 0.001)
                 counter++;

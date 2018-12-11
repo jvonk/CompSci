@@ -38,9 +38,10 @@ public class Projectile {
             this.color = new Color(255, 100, 100);
     }
 
-    public void playSound() {
+
+    public void playSound(String s) {
         try {
-            URL url = this.getClass().getClassLoader().getResource("sound/cannon.wav");
+            URL url = this.getClass().getClassLoader().getResource("sound/" + s + ".wav");
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(url));
             clip.start();
@@ -48,7 +49,6 @@ public class Projectile {
             exc.printStackTrace(System.out);
         }
     }
-
     public void checkCollision(Projectile enemy) {
         // return (Math.hypot(this.x-enemy.x, this.y-enemy.y)<=20.0);
         if (x + width >= enemy.getX() && x <= enemy.getX() + enemy.getWidth() && y + height >= enemy.getY()
@@ -126,7 +126,7 @@ public class Projectile {
 
     public void setPosition(int x, int y) {
         if (!visibility || dead) {
-            this.playSound();
+            this.playSound("cannon");
             visibility = true;
             this.x = x;
             this.y = y;

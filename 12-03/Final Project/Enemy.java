@@ -41,9 +41,9 @@ public class Enemy {
         this.color = new Color(255, 0, 0);
     }
 
-    public void playSound() {
+    public void playSound(String s) {
         try {
-            URL url = this.getClass().getClassLoader().getResource("sound/hit.wav");
+            URL url = this.getClass().getClassLoader().getResource("sound/" + s + ".wav");
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(url));
             clip.start();
@@ -59,7 +59,7 @@ public class Enemy {
                 && y <= enemy.getY() + enemy.getHeight()) {
             this.setDead(true);
             change = true;
-            this.playSound();
+            this.playSound("hit");
         }
         p.checkCollision(enemy);
         return change;
