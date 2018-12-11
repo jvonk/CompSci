@@ -6,7 +6,7 @@ public class Runner {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
         //Create panel and add it to the frame
-        Screen sc = new Screen();
+        Screen sc = new Screen(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
         frame.add(sc);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

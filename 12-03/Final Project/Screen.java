@@ -1,7 +1,9 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Graphics;
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Composite;
 import javax.swing.JPanel;
 import java.net.URL;
 import javax.sound.sampled.AudioSystem;
@@ -12,6 +14,7 @@ import java.awt.RenderingHints;
 
 public class Screen extends JPanel implements KeyListener {
     private Projectile p1;
+	private int wid, hei;
     // private Projectile[] projectiles;
     private Ship s1;
     private Enemy[] enemies, level1, level2;
@@ -24,10 +27,12 @@ public class Screen extends JPanel implements KeyListener {
     private Heart heart;
     private int numLevels;
 
-    public Screen() {
+    public Screen(int initW, int initH) {
         numLevels=50;
         p1 = new Projectile(50, 500, true);
         p1.setVelocity(80, 30);
+		wid=initW;
+		hei=initH;
 
         // projectiles=new Projectile[] {new Projectile(50, 500, true)};
         debris = new Debris[100];
@@ -123,7 +128,7 @@ public class Screen extends JPanel implements KeyListener {
     }
 
     public Dimension getPreferredSize() {
-        return new Dimension(800, 600); // Sets the size of the panel
+        return new Dimension(wid, hei); // Sets the size of the panel
     }
 
     public void playSound(String s) {
@@ -140,15 +145,21 @@ public class Screen extends JPanel implements KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+		    Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, ((float)0.8);
+    g2.setComposite(c);
+
+		g2.scale(1.0*wid/800, 1.0*hei/600);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_LCD_CONTRAST, 100);
 
         if (level == 1) {
-            g.setColor(new Color(135, 206, 235));
-            g.fillRect(0, 0, 800, 300);
-            g.setColor(new Color(87, 59, 12));
-            g.fillRect(0, 300, 800, 300);
-            g.setColor(new Color(252, 212, 64));
-            g.fillOval(50, 50, 100, 100);
+            g2.setColor(new Color(135, 206, 235));
+            g2.fillRect(0, 0, 800, 300);
+            g2.setColor(new Color(87, 59, 12));
+            g2.fillRect(0, 300, 800, 300);
+            g2.setColor(new Color(252, 212, 64));
+            g2.fillOval(50, 50, 100, 100);
             int x = (int)(0.1*(System.currentTimeMillis()-time))%800;
             g2.setColor(new Color(220, 240, 255));
             g2.fillOval((2*x)%1200+25, 100, 200, 100);
@@ -162,54 +173,54 @@ public class Screen extends JPanel implements KeyListener {
             g2.fillOval((3*x)%1200-600+425, 125, 200, 100);
             g2.fillOval((3*x)%1200-600+375, 75, 200, 100);
         } else if (level == 2) {
-            g.setColor(new Color(255, 128, 255));
-            g.fillRect(0, 300, 800, 300);
-            g.setColor(new Color(255, 150, 128));
-            g.fillRect(0, 0, 800, 300);
+            g2.setColor(new Color(255, 128, 255));
+            g2.fillRect(0, 300, 800, 300);
+            g2.setColor(new Color(255, 150, 128));
+            g2.fillRect(0, 0, 800, 300);
             if ((int)(System.currentTimeMillis()-time)%1000<100) {
                 int tx = (int)(Math.random()*800.0);
                 int[] prev = new int[] {tx, -20};
                 int[] current = new int[] {tx, -20};
-                g.setColor(new Color(220, 230, 255));
+                g2.setColor(new Color(220, 230, 255));
                 for (int i = 0; i < 100; i++) {
                     prev=current.clone();
                     current[0]+=Math.pow(Math.round(Math.random()*10.0), 2)*(Math.random()-0.5);
                     current[1]+=Math.pow(Math.round(Math.random()*10.0), 2)*(Math.random()-0.5)+(Math.random()*5+2);
                     for (int j = 0; j < 10; j++) {
-                        g.drawLine(prev[0]+400+j, prev[1], current[0]+400+j, current[1]);
+                        g2.drawLine(prev[0]+400+j, prev[1], current[0]+400+j, current[1]);
                     }
                     current[0]%=800;
                     current[1]%=600;
                 }
             }
         } else if (level == 3) {
-            g.setColor(new Color(100, 200, 255));
-            g.fillRect(0, 0, 800, 300);
-            g.setColor(new Color(0, 150, 128));
-            g.fillRect(0, 300, 800, 300);
-            g.setColor(new Color(252, 212, 64));
-            g.fillOval(10, 10, 100, 100);
-            g.setColor(new Color(252, 190, 50));
-            g.fillOval(30, 30, 60, 60);
-            g.setColor(new Color(80, 40, 25));
-            g.fillPolygon(new int[] {50, 400, 750}, new int[] {600, 300, 600}, 3);
-            g.setColor(new Color(255, 40, 25));
-            g.fillPolygon(new int[] {310, 400, 490, 420, 400, 380}, new int[] {375, 300, 375, 420, 380, 400}, 6);        
+            g2.setColor(new Color(100, 200, 255));
+            g2.fillRect(0, 0, 800, 300);
+            g2.setColor(new Color(0, 150, 128));
+            g2.fillRect(0, 300, 800, 300);
+            g2.setColor(new Color(252, 212, 64));
+            g2.fillOval(10, 10, 100, 100);
+            g2.setColor(new Color(252, 190, 50));
+            g2.fillOval(30, 30, 60, 60);
+            g2.setColor(new Color(80, 40, 25));
+            g2.fillPolygon(new int[] {50, 400, 750}, new int[] {600, 300, 600}, 3);
+            g2.setColor(new Color(255, 40, 25));
+            g2.fillPolygon(new int[] {310, 400, 490, 420, 400, 380}, new int[] {375, 300, 375, 420, 380, 400}, 6);        
         } else if (level == 4) {
-            g.setColor(new Color(120, 120, 200));
-            g.fillRect(0, 0, 800, 300);
-            g.setColor(new Color(120, 60, 255));
-            g.fillRect(0, 300, 800, 300);
+            g2.setColor(new Color(120, 120, 200));
+            g2.fillRect(0, 0, 800, 300);
+            g2.setColor(new Color(120, 60, 255));
+            g2.fillRect(0, 300, 800, 300);
         } else if (level==numLevels) {
-            g.setColor(new Color(106,197,244));
-            g.fillRect(0, 0, 800, 300);
-            g.setColor(new Color(252,81,11));
-            g.fillRect(0, 300, 800, 300);
+            g2.setColor(new Color(106,197,244));
+            g2.fillRect(0, 0, 800, 300);
+            g2.setColor(new Color(252,81,11));
+            g2.fillRect(0, 300, 800, 300);
         } else {
-            g.setColor(new Color((level*143)%255,(level*33+212)%255,(level*45+122)%255));
-            g.fillRect(0, 0, 800, 300);
-            g.setColor(new Color((level*55+32)%255,(level*78+180)%255,(level*91+30)%255));
-            g.fillRect(0, 300, 800, 300);
+            g2.setColor(new Color((level*143)%255,(level*33+212)%255,(level*45+122)%255));
+            g2.fillRect(0, 0, 800, 300);
+            g2.setColor(new Color((level*55+32)%255,(level*78+180)%255,(level*91+30)%255));
+            g2.fillRect(0, 300, 800, 300);
         }
 
         for (int i = 0; i < debris.length; i++) {
@@ -223,19 +234,14 @@ public class Screen extends JPanel implements KeyListener {
         } else if (s1.getDead()) {
             g2.drawString("YOU LOSE", 100, 100);
         } else {
-            boolean win = true;
             for (int i = 0; i < enemies.length; i++) {
                 enemies[i].drawMe(g2);
-                if (!enemies[i].getDead())
-                    win = false;
             }
             heart.drawMe(g2);
-            if (win)
-                this.win();
             p1.drawMe(g2);
+			g2.setColor(Color.BLACK);
             g2.drawString("Time Left: " + (int) (1000000 - Math.round(System.currentTimeMillis() - time)), 100, 80);
             if (System.currentTimeMillis() - time > 1000000) {
-                s1.setLives(-1);
                 g2.drawString("YOU LOSE", 100, 100);
             }
             /*
@@ -246,6 +252,7 @@ public class Screen extends JPanel implements KeyListener {
         g2.setColor(Color.BLACK);
         g2.drawString("Score: " + score+"/"+enemies.length, 100, 120);
         g2.drawString("Level: " + level+"/"+(numLevels), 100, 140);
+		
     }
 
     public void animate() {
@@ -265,14 +272,15 @@ public class Screen extends JPanel implements KeyListener {
             int oldScore = score;
             score = 0;
             int oldLives = s1.getLives();
-            if (2 * ((counter) % enemies.length) < enemies.length) {
-                heart.moveUp();
-            } else {
-                heart.moveDown();
-            }
-            heart.moveLeft();
-            s1.checkCollision(heart);
-
+			if (enemies.length>0) {
+				if (2 * ((counter) % enemies.length) < enemies.length) {
+					heart.moveUp();
+				} else {
+					heart.moveDown();
+				}
+				heart.moveLeft();
+				s1.checkCollision(heart);
+			}
             for (int i = 0; i < enemies.length; i++) {
                 if (enemies[i].getDead()) {
                     score++;
@@ -303,6 +311,18 @@ public class Screen extends JPanel implements KeyListener {
             }
             if (Math.random() < 0.001)
                 counter++;
+			if (level!=numLevels&&!s1.getDead()) {
+				boolean win = true;
+				for (int i = 0; i < enemies.length; i++) {
+					if (!enemies[i].getDead())
+						win = false;
+				}
+				if (win)
+					this.win();
+				if (System.currentTimeMillis() - time > 1000000) {
+					s1.setLives(-1);
+				}
+			}
             repaint();
         }
     }
@@ -328,6 +348,7 @@ public class Screen extends JPanel implements KeyListener {
         if (level>=numLevels) {
             level=numLevels;
             enemies = convert(levels.length-1);
+			playSound("win");
         } else if (level >= levels.length-1) {
             int len = (int)(Math.random()*level+1);
             Enemy[] temp = new Enemy[len];
@@ -353,30 +374,29 @@ public class Screen extends JPanel implements KeyListener {
             return;
         }
         switch (e.getKeyCode()) {
-        case 38:
-            s1.moveUp();
-            break;
-        case 40:
-            s1.moveDown();
-            break;
-        case 32: {
-            /*
-             * for (int i = 0; i < projectiles.length; i++) {
-             * projectiles[i].setPosition(s1.getX(), s1.getY() + 15);
-             * projectiles[i].setVelocity(i-1, 3); }
-             */
-            p1.setPosition(s1.getX(), s1.getY() + 15);
-            p1.setVelocity(0, 3);
+			case 38:
+				s1.moveUp();
+				break;
+			case 40:
+				s1.moveDown();
+				break;
+			case 32: {
+				/*
+				 * for (int i = 0; i < projectiles.length; i++) {
+				 * projectiles[i].setPosition(s1.getX(), s1.getY() + 15);
+				 * projectiles[i].setVelocity(i-1, 3); }
+				 */
+				p1.setPosition(s1.getX(), s1.getY() + 15);
+				p1.setVelocity(0, 3);
+			}
+				break;
+			case 80:
+				this.win();
+				break;
+			case 82:
+				s1.setLives(3);
+				break;
         }
-            break;
-        case 80:
-            this.win();
-            break;
-        case 82:
-            s1.setLives(3);
-            break;
-        }
-        repaint();
     }
 
     public void keyReleased(KeyEvent e) {
