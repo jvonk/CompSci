@@ -73,10 +73,9 @@ public class Ship {
     public boolean getDead() {
         return lives <= 0;
     }
-
-    public void playSound() {
+    public void playSound(String s) {
         try {
-            URL url = this.getClass().getClassLoader().getResource("sound/hit.wav");
+            URL url = this.getClass().getClassLoader().getResource("sound/" + s + ".wav");
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(url));
             clip.start();
@@ -93,7 +92,6 @@ public class Ship {
     public void setDead(boolean bool) {
         if (bool) {
             lives--;
-            this.playSound();
         } else {
             lives = 3;
         }
