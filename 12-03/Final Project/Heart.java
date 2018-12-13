@@ -33,19 +33,19 @@ public class Heart {
     public boolean getDead() {
         return dead;
     }
-    public double getX() {
+    public double getaX() {
         return x;
     }
 
-    public double getY() {
+    public double getaY() {
         return y;
     }
 
-    public double getWidth() {
+    public double getaWidth() {
         return width;
     }
 
-    public double getHeight() {
+    public double getaHeight() {
         return height;
     }
 

@@ -9,13 +9,21 @@ import javax.sound.sampled.Clip;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 
-public class Enemy {
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
+public class Enemy extends JComponent {
     private double initX, x, initY, y, width, height, vel;
     private Color color;
     private boolean dead = false;
     private Projectile p;
     private int lives;
+    private Image img1 = Toolkit.getDefaultToolkit().getImage("img/enemy.png");
 
     public Enemy(double x, double y, double inVel) {
         this.initX = x;
@@ -26,17 +34,17 @@ public class Enemy {
 
         this.width = 40;
         this.height = 40;
-        if (inVel>1) {
-            this.width=100;
-            this.height=100;
-            this.lives=3;
+        if (inVel > 1) {
+            this.width = 100;
+            this.height = 100;
+            this.lives = 3;
         } else {
             this.lives = 0;
         }
 
-        this.vel=inVel; 
-        this.p = new Projectile((int)(x - 20), (int)(y), false);
-        p.setVelocity(0, -vel*3);
+        this.vel = inVel;
+        this.p = new Projectile((int) (x - 20), (int) (y), false);
+        p.setVelocity(0, -vel * 20);
 
         this.color = new Color(255, 0, 0);
     }
@@ -55,8 +63,8 @@ public class Enemy {
     public boolean checkCollision(Projectile enemy) {
         // return (Math.hypot(this.x-enemy.x, this.y-enemy.y)<=20.0);
         boolean change = false;
-        if (!enemy.getDead() && x + width >= enemy.getX() && x <= enemy.getX() + enemy.getWidth() && y + height >= enemy.getY()
-                && y <= enemy.getY() + enemy.getHeight()) {
+        if (!enemy.getDead() && x + width >= enemy.getaX() && x <= enemy.getaX() + enemy.getaWidth()
+                && y + height >= enemy.getaY() && y <= enemy.getaY() + enemy.getaHeight()) {
             this.setDead(true);
             change = true;
             this.playSound("hit");
@@ -68,65 +76,71 @@ public class Enemy {
     public boolean getDead() {
         return dead;
     }
+
     public void setDead(boolean in) {
         if (in) {
             lives--;
-            if (lives<1) dead=true;
+            if (lives < 1)
+                dead = true;
         } else {
-            dead=false;
+            dead = false;
         }
     }
-    public double getX() {
+
+    public double getaX() {
         return x;
     }
 
-    public double getY() {
+    public double getaY() {
         return y;
     }
 
-    public double getWidth() {
+    public double getaWidth() {
         return width;
     }
 
-    public double getHeight() {
+    public double getaHeight() {
         return height;
     }
-
 
     public boolean getPDead() {
         return p.getDead();
     }
+
     public void setPDead(boolean in) {
         p.setDead(in);
     }
+
     public double getPX() {
-        return p.getX();
+        return p.getaX();
     }
 
     public double getPY() {
-        return p.getY();
+        return p.getaY();
     }
 
     public double getPWidth() {
-        return p.getWidth();
+        return p.getaWidth();
     }
 
     public double getPHeight() {
-        return p.getHeight();
+        return p.getaHeight();
     }
 
     public void drawMe(Graphics2D g) {
         if (!dead) {
 
-            g.setColor(color);
-            g.fillOval((int)(x), (int)(y), (int)(width), (int)(height));
-            g.setColor(Color.WHITE);
-            g.fillOval((int)(x + width / 6), (int)(y + height / 6), (int)(width * 2 / 3), (int)(height * 2 / 3));
-            g.setColor(color);
-            g.fillOval((int)(x + width / 3), (int)(y + height / 3), (int)(width / 3), (int)(height / 3));
-            if (p.getX() < -30 && Math.random() < 0.007) {
-                this.p = new Projectile((int)(x - 20), (int)(y), false);
-                p.setVelocity(0, -vel*2);
+            g.drawImage(img1, (int) x, (int) y, (int) width, (int) height, this);
+            /*
+             * g.setColor(color); g.fillOval((int)(x), (int)(y), (int)(width),
+             * (int)(height)); g.setColor(Color.WHITE); g.fillOval((int)(x + width / 6),
+             * (int)(y + height / 6), (int)(width * 2 / 3), (int)(height * 2 / 3));
+             * g.setColor(color); g.fillOval((int)(x + width / 3), (int)(y + height / 3),
+             * (int)(width / 3), (int)(height / 3));
+             */
+            if (p.getaX() < -30 && Math.random() < 0.007) {
+                this.p = new Projectile((int) (x - 20), (int) (y), false);
+                p.setVelocity(0, -vel * 20);
             }
         }
         p.drawMe(g);
@@ -135,15 +149,15 @@ public class Enemy {
 
     public void moveUp() {
         if (Math.random() < 0.3)
-            y -= this.vel==2?3:1;
+            y -= this.vel == 2 ? 3 : 1;
         if (y < 0)
             y = 620;
     }
 
     public void moveDown() {
         if (Math.random() < 0.3)
-            y += this.vel==2?2.5:1;
-        if (y > 600-height)
+            y += this.vel == 2 ? 2.5 : 1;
+        if (y > 600 - height)
             y = -20;
     }
 

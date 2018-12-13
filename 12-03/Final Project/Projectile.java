@@ -9,8 +9,16 @@ import javax.sound.sampled.Clip;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 
-public class Projectile {
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
+public class Projectile extends JComponent {
+    private Image img1 = Toolkit.getDefaultToolkit().getImage("img/bro.png");
     private double x, y, initX, initY, initXVel, xVel, initYVel, yVel, gravity, time;
     private int height, width;
     private Color color;
@@ -38,7 +46,6 @@ public class Projectile {
             this.color = new Color(255, 100, 100);
     }
 
-
     public void playSound(String s) {
         try {
             URL url = this.getClass().getClassLoader().getResource("sound/" + s + ".wav");
@@ -49,10 +56,11 @@ public class Projectile {
             exc.printStackTrace(System.out);
         }
     }
+
     public void checkCollision(Projectile enemy) {
         // return (Math.hypot(this.x-enemy.x, this.y-enemy.y)<=20.0);
-        if (x + width >= enemy.getX() && x <= enemy.getX() + enemy.getWidth() && y + height >= enemy.getY()
-                && y <= enemy.getY() + enemy.getHeight()) {
+        if (x + width >= enemy.getaX() && x <= enemy.getaX() + enemy.getaWidth() && y + height >= enemy.getaY()
+                && y <= enemy.getaY() + enemy.getaHeight()) {
             if (good) {
                 enemy.setDead(true);
             } else {
@@ -63,8 +71,12 @@ public class Projectile {
 
     public void drawMe(Graphics2D g) {
         if (!dead) {
-            g.setColor(color);
-            g.fillOval((int) (Math.round(x)), (int) (Math.round(y)), width, height);
+            if (good)
+                g.drawImage(img1, (int) x, (int) y, (int) width, (int) height, this);
+            else {
+                g.setColor(color);
+                g.fillOval((int) (Math.round(x)), (int) (Math.round(y)), width, height);
+            }
         }
     }
 
@@ -111,10 +123,12 @@ public class Projectile {
     public void setVisible(boolean visible) {
         visibility = visible;
     }
+
     public void setDead(boolean b) {
-        dead=b;
-        visibility=b;
+        dead = b;
+        visibility = b;
     }
+
     public boolean getDead() {
         return dead;
     }
@@ -134,19 +148,19 @@ public class Projectile {
         }
     }
 
-    public double getX() {
+    public double getaX() {
         return x;
     }
 
-    public double getY() {
+    public double getaY() {
         return y;
     }
 
-    public int getWidth() {
+    public int getaWidth() {
         return width;
     }
 
-    public int getHeight() {
+    public int getaHeight() {
         return height;
     }
 }

@@ -9,11 +9,18 @@ import javax.sound.sampled.Clip;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 
-public class Ship {
+public class Ship extends JComponent {
     private int initX, x, initY, y, width, height, initLives, lives;
     private Color color;
+    private Image img1 = Toolkit.getDefaultToolkit().getImage("img/ship.png");
 
     public Ship(int x, int y) {
         this.initX = x;
@@ -32,47 +39,49 @@ public class Ship {
     }
 
     public void checkCollision(Enemy enemy) {
-        if (!enemy.getDead() && x + width >= enemy.getX() && x <= enemy.getX() + enemy.getWidth() && y + height >= enemy.getY()
-                && y <= enemy.getY() + enemy.getHeight()) {
+        if (!enemy.getDead() && x + width >= enemy.getaX() && x <= enemy.getaX() + enemy.getaWidth()
+                && y + height >= enemy.getaY() && y <= enemy.getaY() + enemy.getaHeight()) {
             this.setDead(true);
             enemy.setDead(true);
         }
-        if (!enemy.getPDead() && x + width >= enemy.getPX() && x <= enemy.getPX() + enemy.getPWidth() && y + height >= enemy.getPY()
-                && y <= enemy.getPY() + enemy.getPHeight()) {
+        if (!enemy.getPDead() && x + width >= enemy.getPX() && x <= enemy.getPX() + enemy.getPWidth()
+                && y + height >= enemy.getPY() && y <= enemy.getPY() + enemy.getPHeight()) {
             this.setDead(true);
             enemy.setPDead(true);
         }
     }
+
     public void checkCollision(Heart enemy) {
-        if (x + width >= enemy.getX() && x <= enemy.getX() + enemy.getWidth() && y + height >= enemy.getY()
-                && y <= enemy.getY() + enemy.getHeight()) {
+        if (x + width >= enemy.getaX() && x <= enemy.getaX() + enemy.getaWidth() && y + height >= enemy.getaY()
+                && y <= enemy.getaY() + enemy.getaHeight()) {
             this.lives++;
         }
     }
 
-    public int getX() {
+    public int getaX() {
         return x;
     }
 
-    public int getY() {
+    public int getaY() {
         return y;
     }
 
     public void setY(int in) {
-        y=in;
+        y = in;
     }
 
-    public int getWidth() {
+    public int getaWidth() {
         return width;
     }
 
-    public int getHeight() {
+    public int getaHeight() {
         return height;
     }
 
     public boolean getDead() {
         return lives <= 0;
     }
+
     public void playSound(String s) {
         try {
             URL url = this.getClass().getClassLoader().getResource("sound/" + s + ".wav");
@@ -83,12 +92,15 @@ public class Ship {
             exc.printStackTrace(System.out);
         }
     }
+
     public int getLives() {
         return lives;
     }
+
     public void setLives(int in) {
-        lives=in;
+        lives = in;
     }
+
     public void setDead(boolean bool) {
         if (bool) {
             lives--;
@@ -98,16 +110,16 @@ public class Ship {
     }
 
     public void drawMe(Graphics2D g) {
-        g.setColor(new Color(255, 0, 0));
-        for (int i = 0; i < lives; i++) {
-            //0, 10, 10, 0, 20, 10, 30, 0, 40, 10, 30, 30
-            g.fillPolygon(new int[] {20+50*i, 30+50*i, 40+50*i, 50+50*i, 60+50*i, 40+50*i}, new int[] {30, 20, 30, 20, 30, 50}, 6);
-        }
-        g.setColor(color);
-        g.fillRect(x, y, width, height);
-
-        g.setColor(new Color(0, 0, 0));
-        g.fillRect(x + width / 2, y + height / 3, width * 2 / 3, height / 3);
+        g.drawImage(img1, x, y, width, height, this);
+        /*
+         * g.setColor(new Color(255, 0, 0)); for (int i = 0; i < lives; i++) { //0, 10,
+         * 10, 0, 20, 10, 30, 0, 40, 10, 30, 30 g.fillPolygon(new int[] {20+50*i,
+         * 30+50*i, 40+50*i, 50+50*i, 60+50*i, 40+50*i}, new int[] {30, 20, 30, 20, 30,
+         * 50}, 6); } g.setColor(color); g.fillRect(x, y, width, height);
+         * 
+         * g.setColor(new Color(0, 0, 0)); g.fillRect(x + width / 2, y + height / 3,
+         * width * 2 / 3, height / 3);
+         */
     }
 
     public void moveUp() {
@@ -117,7 +129,7 @@ public class Ship {
     }
 
     public void moveDown() {
-        if (y <= 595-height) {
+        if (y <= 595 - height) {
             y += 5;
         }
     }
