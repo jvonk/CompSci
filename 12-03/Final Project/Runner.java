@@ -10,6 +10,8 @@ public class Runner {
         else
             sc = new Screen(800, 600);
         System.setProperty("sun.java2d.opengl", "True");
+        System.setProperty("sun.java2d.noddraw", "True");
+        System.setProperty("sun.java2d.d3d", "False");
         frame.add(sc);
         frame.setResizable(false);
         frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
