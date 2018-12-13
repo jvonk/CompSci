@@ -127,7 +127,7 @@ public class Enemy extends JComponent {
         return p.getaHeight();
     }
 
-    public void drawMe(Graphics2D g) {
+    public void drawMe(Graphics2D g, boolean showBox) {
         if (!dead) {
 
             g.drawImage(img1, (int) x, (int) y, (int) width, (int) height, this);
@@ -142,8 +142,12 @@ public class Enemy extends JComponent {
                 this.p = new Projectile((int) (x - 20), (int) (y), false);
                 p.setVelocity(0, -vel * 20);
             }
+
+            if (showBox) {
+                g.drawRect((int) x, (int) y, (int) width, (int) height);
+            }
         }
-        p.drawMe(g);
+        p.drawMe(g, showBox);
         p.move();
     }
 

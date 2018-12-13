@@ -71,10 +71,9 @@ public class Heart {
         g.fillPolygon(triangleX, triangleY, triangleX.length);
     }
     
-    public void drawMe(Graphics g) {
+    public void drawMe(Graphics2D g2, boolean showBox) {
         if (!dead) {
 
-            Graphics2D g2 = (Graphics2D) g;
             int[] triangleX = {
                 (int)(x - 2*width/18),
                 (int)(x + width + 2*width/18),
@@ -97,6 +96,9 @@ public class Heart {
                 (int)(height/2));
         g2.fillPolygon(triangleX, triangleY, triangleX.length);
 
+        if (showBox) {
+            g2.drawRect((int) x, (int) y, (int) width, (int) height);
+        }
         }
     }
 

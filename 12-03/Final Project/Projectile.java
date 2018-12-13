@@ -69,13 +69,16 @@ public class Projectile extends JComponent {
         }
     }
 
-    public void drawMe(Graphics2D g) {
+    public void drawMe(Graphics2D g, boolean showBox) {
         if (!dead) {
             if (good)
                 g.drawImage(img1, (int) x, (int) y, (int) width, (int) height, this);
             else {
                 g.setColor(color);
                 g.fillOval((int) (Math.round(x)), (int) (Math.round(y)), width, height);
+            }
+            if (showBox) {
+                g.drawRect((int) x, (int) y, (int) width, (int) height);
             }
         }
     }

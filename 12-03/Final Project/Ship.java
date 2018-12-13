@@ -109,8 +109,12 @@ public class Ship extends JComponent {
         }
     }
 
-    public void drawMe(Graphics2D g) {
+    public void drawMe(Graphics2D g, boolean showBox) {
         g.drawImage(img1, x, y, width, height, this);
+
+        if (showBox) {
+            g.drawRect((int) x, (int) y, (int) width, (int) height);
+        }
         /*
          * g.setColor(new Color(255, 0, 0)); for (int i = 0; i < lives; i++) { //0, 10,
          * 10, 0, 20, 10, 30, 0, 40, 10, 30, 30 g.fillPolygon(new int[] {20+50*i,

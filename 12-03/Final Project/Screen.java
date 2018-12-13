@@ -14,6 +14,7 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 
 public class Screen extends JPanel implements KeyListener {
+    private boolean showBox;
     private Projectile p1;
     private int wid, hei;
     // private Projectile[] projectiles;
@@ -34,6 +35,7 @@ public class Screen extends JPanel implements KeyListener {
         p1.setVelocity(80, 30);
         wid = initW;
         hei = initH;
+        showBox=false;
 
         // projectiles=new Projectile[] {new Projectile(50, 500, true)};
         debris = new Debris[100];
@@ -203,15 +205,15 @@ public class Screen extends JPanel implements KeyListener {
         g2.setColor(Color.BLACK);
         if (level == numLevels) {
             g2.drawString("YOU WIN", 100, 100);
-            s1.drawMe(g2);
+            s1.drawMe(g2, showBox);
         } else if (s1.getDead()) {
             g2.drawString("YOU LOSE", 100, 100);
         } else {
             for (int i = 0; i < enemies.length; i++) {
-                enemies[i].drawMe(g2);
+                enemies[i].drawMe(g2, showBox);
             }
-            heart.drawMe(g2);
-            p1.drawMe(g2);
+            heart.drawMe(g2, showBox);
+            p1.drawMe(g2, showBox);
             g2.setColor(Color.BLACK);
             g2.drawString("Time Left: " + (int) (1000000 - Math.round(System.currentTimeMillis() - time)), 100, 80);
             if (System.currentTimeMillis() - time > 1000000) {
@@ -220,7 +222,7 @@ public class Screen extends JPanel implements KeyListener {
             /*
              * for (int i = 0; i < projectiles.length; i++) { projectiles[i].drawMe(g2); }
              */
-            s1.drawMe(g2);
+            s1.drawMe(g2, showBox);
         }
         g2.setColor(Color.BLACK);
         g2.drawString("Score: " + score + "/" + enemies.length, 100, 120);
@@ -229,6 +231,8 @@ public class Screen extends JPanel implements KeyListener {
     }
 
     public void animate() {
+
+        playSound("lasagna");
         while (true) {
             // wait for .01 second
             try {
@@ -368,6 +372,9 @@ public class Screen extends JPanel implements KeyListener {
             break;
         case 82:
             s1.setLives(3);
+            break;
+        case 84:
+            showBox=!showBox;
             break;
         }
     }
