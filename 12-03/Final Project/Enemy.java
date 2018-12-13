@@ -44,7 +44,7 @@ public class Enemy extends JComponent {
 
         this.vel = inVel;
         this.p = new Projectile((int) (x - 20), (int) (y), false);
-        p.setVelocity(0, -vel * 20);
+        p.setVelocity(0, -vel * 3);
 
         this.color = new Color(255, 0, 0);
     }
@@ -140,7 +140,7 @@ public class Enemy extends JComponent {
              */
             if (p.getaX() < -30 && Math.random() < 0.007) {
                 this.p = new Projectile((int) (x - 20), (int) (y), false);
-                p.setVelocity(0, -vel * 20);
+                p.setVelocity(0, -vel * 3);
             }
 
             if (showBox) {
