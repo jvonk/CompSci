@@ -27,6 +27,7 @@ public class Heart {
 
         this.vel=inVel; 
         this.color = new Color(255, 0, 0);
+        dead=false;
     }
 
 
@@ -89,16 +90,16 @@ public class Heart {
                 (int)(y), 
                 (int)(width/2 + width/6), 
                 (int)(height/2)); 
-        g2.fillOval(
+			g2.fillOval(
                 (int)(x + width/2 - width/12),
                 (int)(y),
                 (int)(width/2 + width/6),
                 (int)(height/2));
-        g2.fillPolygon(triangleX, triangleY, triangleX.length);
+			g2.fillPolygon(triangleX, triangleY, triangleX.length);
 
-        if (showBox) {
-            g2.drawRect((int) x, (int) y, (int) width, (int) height);
-        }
+			if (showBox) {
+				g2.drawRect((int) x, (int) y, (int) width, (int) height);
+			}
         }
     }
 

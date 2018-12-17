@@ -14,7 +14,7 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 
 public class Screen extends JPanel implements KeyListener {
-    private boolean showBox;
+    private boolean showBox, lasagna;
     private Projectile p1;
     private int wid, hei;
     // private Projectile[] projectiles;
@@ -36,6 +36,7 @@ public class Screen extends JPanel implements KeyListener {
         wid = initW;
         hei = initH;
         showBox=false;
+        lasagna=false;
 
         // projectiles=new Projectile[] {new Projectile(50, 500, true)};
         debris = new Debris[100];
@@ -227,12 +228,15 @@ public class Screen extends JPanel implements KeyListener {
         g2.setColor(Color.BLACK);
         g2.drawString("Score: " + score + "/" + enemies.length, 100, 120);
         g2.drawString("Level: " + level + "/" + (numLevels), 100, 140);
+        g2.drawString("Lives: " + s1.getLives(), 100, 180);
 
     }
 
     public void animate() {
-
+        if (lasagna)
         playSound("lasagna");
+        else
+        playSound("sonic");
         while (true) {
             // wait for .01 second
             try {
@@ -375,6 +379,14 @@ public class Screen extends JPanel implements KeyListener {
             break;
         case 84:
             showBox=!showBox;
+            break;
+        case 66: {
+            lasagna=!lasagna;
+            if (lasagna)
+            playSound("lasagna");
+            else
+            playSound("sonic");
+        }    
             break;
         }
     }
