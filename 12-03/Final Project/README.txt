@@ -1,0 +1,1 @@
+I finished the challenges of shooting enemies and a boss on the third level. Additionally, there are hearts that give you exta lives that spawn randomly. Finally, arrow keys to control and space bar to shoot and t to toggle hitboxes and r to set lives to 3 and p to go to the next level.
