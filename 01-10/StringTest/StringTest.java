@@ -16,6 +16,6 @@ public class StringTest {
         System.out.println(myText.indexOf(in, 0));
     }
     public int countChar(char in) {
-        return testString.chars().filter(ch -> ch == in).count();
+        return (int)myText.chars().filter(ch -> ch == in).count();
     }
 }

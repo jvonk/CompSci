@@ -1,7 +1,7 @@
 
 public class Runner {
     public static void main(String[] args) {
-        StrintTest test1 = new StringTest("The quick brown fox jumps over the lazy dog");
+        StringTest test1 = new StringTest("The quick brown fox jumps over the lazy dog");
         test1.printInfo();
         test1.printChar(0);
         test1.printChar(5);
