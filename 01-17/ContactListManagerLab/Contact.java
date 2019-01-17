@@ -10,10 +10,10 @@ public class Contact implements Comparable<Contact> {
         return firstName;
     }
     public String getLastName() {
-        return firstName;
+        return lastName;
     }
     public String getUserName() {
-        return email.substring(email.indexOf("@"));
+        return email.substring(0, email.indexOf("@"));
     }
     public String getDomainName() {
         return email.substring(email.indexOf("@")+1, email.lastIndexOf("."));
