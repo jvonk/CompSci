@@ -1,5 +1,0 @@
-class SortByEmail implements Comparator<Contact> { 
-    public int compare(Contact a, Contact b) { 
-        return a.email.compareTo(b.email); 
-    } 
-}

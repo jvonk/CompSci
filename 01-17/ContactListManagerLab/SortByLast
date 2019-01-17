@@ -1,5 +1,0 @@
-class SortByLast implements Comparator<Contact> { 
-    public int compare(Contact a, Contact b) { 
-        return a.lastName.compareTo(b.lastName); 
-    } 
-}

@@ -1,5 +1,0 @@
-class SortByFirst implements Comparator<Contact> { 
-    public int compare(Contact a, Contact b) { 
-        return a.firstName.compareTo(b.firstName); 
-    } 
-}
