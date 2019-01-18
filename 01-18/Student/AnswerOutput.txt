@@ -1,0 +1,7 @@
+Testing Part A
+apple : pear -> apar
+pear : apple -> peple
+
+Testing Part B
+(apar, peple, that, cis)
+

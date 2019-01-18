@@ -1,0 +1,14 @@
+Hint for Part A:
+Get the substring of the first word from 0 to middle
+Get the substring of the 2nd word from middle to the end.
+Combine them to a new string and return it.
+
+
+Hint for Part B
+Create a string array called newWords that has the same length as the words array passed in.
+Go through each item of the newWords using a loop
+    if the index is even (this means we will recombine the current with next)
+        set newWords at that location to the result calling the method recombine and passing in words[i] and words[i+1]
+    else (this means we will recombine the current with previous)
+        set newWords at that location to the result calling the method recombine and passing in words[i] and words[i-1]
+return newWords
