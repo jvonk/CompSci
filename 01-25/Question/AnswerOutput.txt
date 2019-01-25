@@ -1,0 +1,30 @@
+Testing for part A
+0) Trigger:1340
+1) null
+2) Silver:1210
+3) Lady:1575
+4) null
+5) Patches:1350
+6) Duke:1410
+Location of Trigger: 0
+Location of Silver: 2
+Location of Coco: -1
+
+Testing for part B
+Before consolidate:
+0) Trigger:1340
+1) null
+2) Silver:1210
+3) null
+4) null
+5) Patches:1350
+6) Duke:1410
+After consolidate:
+0) Trigger:1340
+1) Silver:1210
+2) Patches:1350
+3) Duke:1410
+4) null
+5) null
+6) null
+
