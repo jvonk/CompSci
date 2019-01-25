@@ -1,0 +1,25 @@
+Hint for Part A:
+Using a for-loop, go through spaces.
+	If spaces[i] is not null and space[i].getName is equals to the name passed in
+		then Return the location which is i
+		
+Return -1 because the loop did not find anything.
+
+Hint for Part B:
+Create a new Horse array of the same size as spaces
+Call it newBarn.
+
+Using a for-loop, go through the spaces array.
+	Create an int called newIndex=0 to track the index of newBarn..
+	If space[i] is not null, then set
+		newBarn[newIndex] = space[i].
+		Increment newIndex. 
+
+Set the spaces array to the newBarn array.
+
+Or
+
+Using a for loop, go through each spaces from 0 to length-1 using 
+	If the space at i is null
+		Go through spaces from i+1 to find the next location that is not null
+			Then swap it with i
