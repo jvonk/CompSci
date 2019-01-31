@@ -6,4 +6,3 @@ public interface Horse
 	int getWeight();
 	// There may be methods that are not shown.
 }
-
