@@ -11,15 +11,23 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.nio.file.*;
-
+import java.awt.*;
+import java.awt.font.TextAttribute;
+import java.math.*;
+import java.text.*;
+import java.util.Map;
+import javax.swing.*;
+import javax.swing.JFormattedTextField.*;
+import javax.swing.event.*;
+import javax.swing.text.InternationalFormatter;
 public class Screen extends JPanel implements ActionListener {
     private ArrayList<Card> deck, player, dealer;
-    private int wins, losses, playerTotal, dealerTotal, adjust, dealerAdjust;
+    private int wins, playerTotal, dealerTotal, adjust, dealerAdjust;
     private JButton newGame, hit, stay;
-    private int width, height;
+    private JTextField bet;
+    private int width, height, currentBet = 1;
     private String text, dealt, tot;
     private boolean over = false;
-
 
     public Screen() {
         this.setLayout(null);
@@ -34,9 +42,10 @@ public class Screen extends JPanel implements ActionListener {
         text = "";
         dealt = "0";
         tot = "";
+        wins = 10;
         width = (int)getPreferredSize().getWidth();
         height = (int)getPreferredSize().getHeight();
-        newGame = new JButton("Start Game");
+        newGame = new JButton("Bet " + currentBet);
         newGame.setBounds(width / 2 - 40, 10, 80, 30);
         newGame.addActionListener(this);
         this.add(newGame);
@@ -49,6 +58,36 @@ public class Screen extends JPanel implements ActionListener {
         stay.addActionListener(this);
         this.add(stay);
         visibility(true);
+        bet = new JTextField();
+        bet.setBounds(200, 10, 50, 30);
+        bet.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                String str = bet.getText();
+                if(str != "") {
+                    currentBet = Integer.parseInt(str);
+                }
+                if(currentBet > wins) {
+                    currentBet = wins;
+                }
+                newGame.setText("Bet " + currentBet);
+            }
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String str = bet.getText();
+                if(str != "") {
+                    currentBet = Integer.parseInt(str);
+                }
+                if(currentBet > wins) {
+                    currentBet = wins;
+                }
+                newGame.setText("Bet " + currentBet);
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+        });
+        this.add(bet);
         this.setFocusable(true);
     }
 
@@ -61,7 +100,7 @@ public class Screen extends JPanel implements ActionListener {
         Graphics2D g = (Graphics2D)graphics;
         if(over) {
             g.setColor(Color.BLACK);
-            g.drawString("GAME OVER, WINS=" + wins + ", LOSSES=" + losses, width / 2 - 180, 100);
+            g.drawString("GAME OVER, SCORE=" + wins, width / 2 - 180, 100);
             return;
         }
         g.setFont(new Font("Arial", Font.PLAIN, 50));
@@ -79,8 +118,8 @@ public class Screen extends JPanel implements ActionListener {
             }
         }
         g.setColor(Color.BLACK);
-        g.drawString("Wins: " + wins, 30, 100);
-        g.drawString("Losses: " + losses, 30, 150);
+        g.drawString("Score: " + wins, 30, 100);
+        g.drawString("Bet: ", 30, 50);
         if(!tot.equals("")) {
             g.drawString("Total: " + tot, width - 400, 100);
         } else {
@@ -159,18 +198,17 @@ public class Screen extends JPanel implements ActionListener {
         int[] values = new int[] {1, 1, 1, 2, 3, 5};
         if((playerTotal - adjust) > 21) {
             text = "YOU LOST";
-            losses++;
         } else if((dealerTotal - dealerAdjust) > 21) {
             text = "YOU WON";
-            wins++;
+            wins += 2 * currentBet;
         } else if(playerTotal - adjust > dealerTotal - dealerAdjust) {
             text = "YOU WON";
-            wins++;
+            wins += 2 * currentBet;
         } else if(dealerTotal - dealerAdjust > playerTotal - adjust) {
             text = "YOU LOST";
-            losses++;
         } else {
             text = "YOU TIED";
+            wins += currentBet;
         }
         dealt = String.valueOf(dealerTotal - dealerAdjust);
         tot = String.valueOf(playerTotal - adjust);
@@ -190,6 +228,14 @@ public class Screen extends JPanel implements ActionListener {
             deal(false);
             text = "";
             tot = "";
+            String str = bet.getText();
+            if(str != "") {
+                currentBet = Integer.parseInt(str);
+            }
+            if(currentBet > wins) {
+                currentBet = wins;
+            }
+            wins -= currentBet;
             visibility(false);
         } else if(e.getSource() == hit) {
             deal(true);
