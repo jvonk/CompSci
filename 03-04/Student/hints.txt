@@ -1,0 +1,18 @@
+Part A:
+if the row is at the top or bottom or if the colum is the far left or far right
+	then return temps[row][col]
+else
+	get the sum of the cell above, below, left, and right of temps[row][col],
+	divide that by 4, and return the result
+
+Part B:
+Create a boolean variable called withinTolerance and set it to true
+Create a new 2D array called newTemps of the same size as temps.  
+(e.g. double[][] newTemps = new double[temps.length][temps[0].length]; )
+Go through the 2D array of temps using a nested for loop
+	given r and c from the loops, set newTemps[r][c] to computeTemp(r,c)
+	if the absolute value of the difference between temps[r][c] and newTemps[r][c]
+	is greater than the tolerance
+		set withinTolerance to false
+Outside the nested for loop, set temps to newTemps
+return withinTolerance
