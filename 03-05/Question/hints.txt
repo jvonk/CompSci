@@ -1,0 +1,14 @@
+Part A:
+create a counter and set it to 0
+go through the pixelValues 2D array
+	if the value of it is WHITE or 255
+		increment the counter
+return the counter
+
+
+Part B:
+Go through the pixelValues 2D array
+check if row+2 and col+2 are within bounds of the 2D Array
+	get the value of current pixelValue subtracted by the pixelValues at r+2,c+2
+	if the result is less than zero
+		set it to zero or BLACK	

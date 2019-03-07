@@ -2,36 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c5fa760-4f2b-41d8-a3f3-dae3b605deea" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../02-26/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../02-26/Game/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../02-26/Game/Runner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../02-26/WarmUp/Runner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../02-26/WarmUp/WarmUp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/TicTacToeLab.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TicTacToe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/BLACK.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/WHITE.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sound/fail-trombone-02.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sound/tick.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sound/tie.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sound/win.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WarmUp/Runner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WarmUp/WarmUp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../03-04/Student/.idea/Student.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../03-04/Student/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../03-04/Student/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../03-04/Student/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../03-04/Student/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../03-04/Student/AnswerOutput.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../03-04/Student/Runner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../03-04/Student/Temperature Grid 2014.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../03-04/Student/TemperatureGrid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../03-04/Student/hints.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03-05/Question/.idea/Question.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03-05/Question/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03-05/Question/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03-05/Question/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03-05/Question/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03-05/Question/AnswerOutput.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03-05/Question/GrayImage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03-05/Question/Runner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03-05/Question/hints.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03-05/Question/pixel.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TicTacToe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="166" column="47" lean-forward="true" selection-start-line="166" selection-start-column="47" selection-end-line="166" selection-end-column="47" />
+            <state relative-caret-position="202">
+              <caret line="259" column="29" selection-start-line="259" selection-start-column="25" selection-end-line="259" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -92,6 +73,7 @@
       <find>}</find>
       <find>(i+1)%3</find>
       <find>(i-1)%3</find>
+      <find>mini</find>
     </findStrings>
     <replaceStrings>
       <replace>new Point(</replace>
@@ -112,9 +94,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
+    <option name="x" value="-10" />
     <option name="width" value="1295" />
-    <option name="height" value="1409" />
+    <option name="height" value="1410" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -151,7 +133,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551317983362" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Chess2" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -188,18 +170,19 @@
       <workItem from="1551292224720" duration="14801000" />
       <workItem from="1551317299363" duration="1277000" />
       <workItem from="1551368069672" duration="22000" />
-      <workItem from="1551800464602" duration="687000" />
+      <workItem from="1551800464602" duration="794000" />
+      <workItem from="1551812559303" duration="162000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16787000" />
+    <option name="totallyTimeSpent" value="17056000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15348525" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15549597" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -207,10 +190,9 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Learn" order="7" />
-      <window_info anchor="bottom" id="JProfiler" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.18128654" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.18128654" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -221,6 +203,7 @@
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3289166" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32969603" />
+      <window_info anchor="bottom" id="JProfiler" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -239,8 +222,8 @@
     <entry file="file://$PROJECT_DIR$/../../../Chess3/src/Chess.java" />
     <entry file="file://$PROJECT_DIR$/TicTacToe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="166" column="47" lean-forward="true" selection-start-line="166" selection-start-column="47" selection-end-line="166" selection-end-column="47" />
+        <state relative-caret-position="202">
+          <caret line="259" column="29" selection-start-line="259" selection-start-column="25" selection-end-line="259" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
