@@ -136,20 +136,6 @@ public class PixelArtLab {
                 }
             }
         }
-
-        public synchronized void playSound(final String url) {
-            try {
-                Clip clip = AudioSystem.getClip();
-                clip.stop();
-                clip.open(AudioSystem.getAudioInputStream(new File("sound/" + url)));
-                clip.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println(url);
-                System.exit(1);
-            }
-        }
-
         void setSelected(int row, int col) {
             board[row][col].setBackground(c);
         }
