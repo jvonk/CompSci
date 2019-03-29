@@ -1,0 +1,11 @@
+Buggy 1:
+isEmpty uses < 0 rather than == 0
+doesn't set size at beginning
+Buggy 2:
+doesn't set size at shuffle
+Buggy 3:
+Shuffling is not random
+Buggy 4:
+Subtracts size before checking if empty when dealing card
+Buggy 5:
+isEmpty uses < 0 rather than == 0
