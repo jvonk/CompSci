@@ -159,10 +159,12 @@ System.out.println(deck);
 
 ### A6Q1
 I won about a third of all games.
-A♠ and J♥
-A♠ and K♦
-5♠ and 6♣
-5♣ and 6♣
+
+Here are the pairs:
+* A♠ and J♥
+* A♠ and K♦
+* 5♠ and 6♣
+* 5♣ and 6♣
 
 ### A6Q2
 Yes because there would be no other way in which to win the game, so you must lose.
