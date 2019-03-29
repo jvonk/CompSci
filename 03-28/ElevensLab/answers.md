@@ -1,32 +1,33 @@
 ###A1E1
-```
+```java
 rank = cardRank;
 suit = cardSuit;
 pointValue = cardPointValue;
 ```
 
-```
+```java
 return suit;
 ```
 
-```
+```java
 return rank;
 ```
 
-```
+```java
 return pointValue;
 ```
 
-```
+```java
 return (otherCard.pointValue==pointValue && otherCard.rank==rank && otherCard.suit==suit);
 ```
 
-```
+```java
 return rank+" of "+suit+"(point value = "+pointValue+")";
 ```
 
 ###A1E2
-```Card[] cs = new Card[] {new Card("9", "Diamonds", 9), new Card("Jack", "Spades", 10), new Card("King", "Clubs", 10)};
+```java
+Card[] cs = new Card[] {new Card("9", "Diamonds", 9), new Card("Jack", "Spades", 10), new Card("King", "Clubs", 10)};
 for (Card c: cs) {
 	System.out.println(c.suit());
 	System.out.println(c.rank());
@@ -37,7 +38,7 @@ for (Card c: cs) {
 ```
 
 ###A2E1
-```
+```java
 cards=new ArrayList<>();
 for (int i = 0; i < ranks.length; i++) {
   for (String suit : suits) {
@@ -48,15 +49,15 @@ size = cards.size();
 shuffle();
 ```
 
-```
+```java
 return cards.size()==0;
 ```
 
-```
+```java
 return size;
 ```
 
-```
+```java
 if (isEmpty()) {
   return null;
 }
@@ -66,7 +67,7 @@ return c;
 ```
 
 ###A2E2
-```
+```java
 Deck[] cs = new Deck[3];
 cs[0] = new Deck(new String[] {"9", "1"}, new String[] {"Diamonds", "Clubs"}, new int[] {9, 1});
 cs[1] = new Deck(new String[] {"Jack"}, new String[] {"Spades"}, new int[] {10});
@@ -85,7 +86,7 @@ A deck is a group of cards with some methods such that it behaves like a normal 
 The deck will contain 3*2 = 6 cards in total because it has all combinations of ranks and suits. 
 
 ###A2Q3
-```
+```java
 String[] ranks = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"};
 String[] suits = {"club", "heart", "diamond", "spade"};
 int[] pointValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
@@ -96,7 +97,7 @@ Deck d = new Deck(ranks, suits, pointValues);
 No because the deck is shuffled afterwards so in the end it makes no real difference. 
 
 ###A3E1
-```
+```java
 int[] temp = new int[values.length];
 int i = 0;
 for (int j = 0; i < (values.length+1)/2; i++, j+=2) temp[j] = values[i];
@@ -104,7 +105,7 @@ for (int j = 1; i < values.length; i++, j+=2) temp[j] = values[i];
 for (i = 0; i < values.length; i++) values[i] = temp[i];
 ```
 
-```
+```java
 for (int i = values.length-1; i > 0; i--) {
   int j = (int) (Math.random()*(i+1));
   int temp = values[j];
@@ -117,14 +118,14 @@ for (int i = values.length-1; i > 0; i--) {
 The perfect shuffle is worse because it is predictable and always does the same. The selection shuffle is must better. 
 
 ###A3Q1
-```
+```java
 public static String flip {
    return (Math.random()<2/3)?"heads":"tails";
 }
 ```
 
 ###A3Q2
-```
+```java
 public static boolean arePermutations (int[] as, int[] bs) {
   Map<Integer, Integer> map = new HashMap<>();
   for (int a : as) {
@@ -143,13 +144,13 @@ public static boolean arePermutations (int[] as, int[] bs) {
 For the sequence {0, 1, 1, 0}
 
 ###A4E1
-```
+```java
 Collections.shuffle(cards);
 size = cards.size();
 ```
 
 ###A4E2
-```
+```java
 Deck deck = new Deck(new String[] {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"}, new String[] {"Diamond", "Spade", "Club", "Heart"}, new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10});
 System.out.println(deck);
 deck.shuffle();
@@ -194,7 +195,7 @@ The anotherPlayIsPossible and isLegal methods should call these methods
 
 It should return {0, 1, 3, 6, 7} It will ignore the null indexes. 
 
-```
+```java
 for (int i : cIndexes) System.out.println(board.cards[i]);
 ```
 
@@ -210,17 +211,17 @@ The Board values get initialized by passing them into its' initializer through a
 The abstract methods in Board.java include anotherPlayIsPossible and isLegal because these methods require different implementations for each game. They cover all the differences because all of the methods exactly overlap each other. 
 
 ###A9E1
-```
+```java
 if (selectedCards.size()==2) return containsPairSum11(selectedCards);
 else if (selectedCards.size()==3) return containsJQK(selectedCards);
 else return false;
 ```
 
-```
+```java
 return containsPairSum11(new ArrayList<>(cardIndexes())) || containsJQK(new ArrayList<>(cardIndexes()));
 ```
 
-```
+```java
 for (int i = 0; i < selectedCards.size(); i++) {
   for (int j = i+1; j < selectedCards.size(); j++) {
      if (cardAt(selectedCards.get(i).intValue()).pointValue() + cardAt(selectedCards.get(j).intValue()).pointValue() == 11 ) return true;
@@ -229,7 +230,7 @@ for (int i = 0; i < selectedCards.size(); i++) {
 return false;
 ```
 
-```
+```java
 boolean[] found = new boolean[3];
 for (int i : selectedCards) {
   if (cardAt(i).rank().equals("jack")) {
