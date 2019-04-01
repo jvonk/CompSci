@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="510a297f-8953-46bc-81c7-523802467a4a" name="Default Changelist" comment="" />
+    <list default="true" id="510a297f-8953-46bc-81c7-523802467a4a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +35,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ElevensLab/Activity Starter Code/Activity9  Starter Code/ElevensBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
+            <state relative-caret-position="1665">
               <caret line="114" selection-start-line="103" selection-end-line="114" />
             </state>
           </provider>
@@ -43,8 +45,8 @@
         <entry file="file://$PROJECT_DIR$/ElevensLab/answers.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="205">
-                <caret line="161" lean-forward="true" selection-start-line="161" selection-end-line="161" />
+              <first_editor relative-caret-position="40">
+                <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
               </first_editor>
               <second_editor />
             </state>
@@ -91,6 +93,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -107,14 +110,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553882048868" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553882051126" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../03-29" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -139,18 +141,19 @@
       <option name="presentableId" value="Default" />
       <updated>1553707485121</updated>
       <workItem from="1553707491264" duration="557000" />
-      <workItem from="1553879575298" duration="2460000" />
+      <workItem from="1553879575298" duration="3060000" />
+      <workItem from="1554050016483" duration="48000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3017000" />
+    <option name="totallyTimeSpent" value="3665000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="761" y="0" width="782" height="831" extended-state="0" />
+    <frame x="951" y="0" width="978" height="1039" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18144044" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18518518" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -216,27 +219,27 @@
     <entry file="file://$PROJECT_DIR$/ElevensLab/Activity Starter Code/Activity9  Starter Code/Card.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ElevensLab/Activity Starter Code/Activity9  Starter Code/Deck.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ElevensLab/Activity Starter Code/Activity9  Starter Code/ElevensGUIRunner.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/ElevensLab/Activity Starter Code/Activity9  Starter Code/CardGameGUI.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElevensLab/Activity Starter Code/Activity9  Starter Code/Deck.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ElevensLab/Activity Starter Code/Activity9  Starter Code/ElevensBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
+        <state relative-caret-position="1665">
           <caret line="114" selection-start-line="103" selection-end-line="114" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ElevensLab/Activity Starter Code/Activity9  Starter Code/ElevensGUIRunner.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/ElevensLab/answers.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="205">
-            <caret line="161" lean-forward="true" selection-start-line="161" selection-end-line="161" />
+          <first_editor relative-caret-position="40">
+            <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
           </first_editor>
           <second_editor />
         </state>
