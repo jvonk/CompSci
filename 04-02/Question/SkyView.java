@@ -15,10 +15,12 @@ public class SkyView
  * scanned have been copied to view and are ordered as 
  * in the original rectangular area of sky. 
  */ 
- public SkyView(int numRows, int numCols, double[] scanned) 
- { /* to be implemented in part (a) */ 
- 	
- 	
+ public SkyView(int numRows, int numCols, double[] scanned) {
+     /* to be implemented in part (a) */
+     view = new double[numRows][numCols];
+     for (int i = 0; i < scanned.length; i++) {
+         view[i/numCols][(i%2==0)?(i%numCols):(numCols-1-i%numCols)] = scanned[i];
+     }
  } 
  
  /** Returns the average of the values in a rectangular section of view. 
@@ -30,17 +32,22 @@ public class SkyView
  * Precondition: 0 <= startCol <= endCol < view[0].length 
  * @return the average of the values in the specified section of view 
  */ 
- public double getAverage(int startRow, int endRow, int startCol, int endCol) 
- { /* to be implemented in part (b) */ }
+ public double getAverage(int startRow, int endRow, int startCol, int endCol) {
+     /* to be implemented in part (b) */
+     double sum = 0;
+     for (int i = startRow; i <= endRow; i++) {
+         for (int j = startCol; j <= endCol; j++) {
+            sum+=view[i][j];
+         }
+     }
+     return 1.0*sum/(endRow-startRow+1)/(endCol-startCol+1);
+ }
  	
  // There may be instance variables, constructors, and methods that are not shown. 
  
- public void printSky()
- {
- 	for(int r=0; r < view.length; r++)
- 	{
- 		for(int c=0; c < view[r].length; c++)
- 		{
+ public void printSky() {
+ 	for(int r=0; r < view.length; r++) {
+ 		for(int c=0; c < view[r].length; c++) {
  			System.out.print(view[r][c] + "\t");
  		}
  		System.out.println();
