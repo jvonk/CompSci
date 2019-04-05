@@ -1,0 +1,21 @@
+Part A.
+Instantiate view with new 2d array with the given numRows and numCols.
+Create a count variable and set it to 0.
+Go through each row of the view 2d array using a for loop
+	If the row number is even,
+		go through the col from 0 to the end
+		set the view 2d array at the current row and col to scanned[count]
+		increment count
+	else
+		go through the col from end to zero
+		set the view 2d array at the current row and col to scanned[count]
+		increment count	
+
+		
+Part B
+Create a total variable
+Go through the view 2D array given the startRow to endRow
+	Go through the view 2D array given the startcol to endCol
+		add the value of each location to total
+Divide total by the number of slots calculated by the dimensions above. 
+The above will get you the average.  Return it.
