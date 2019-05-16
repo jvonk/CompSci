@@ -100,6 +100,7 @@ public class Screen extends JPanel {
                         p.y = getHeight()+p.height;
                     }
                 }
+                p.updateImage(movementState);
                 updateSpeaking();
                 repaint();
             }

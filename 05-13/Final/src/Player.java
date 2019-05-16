@@ -22,8 +22,4 @@ public class Player extends Item {
         g.setColor(Color.BLACK);
         g.drawString("Hello", 100, 450);
     }
-
-    public boolean intersects(Player other) {
-        return new Rectangle(x, y, width, height).intersects(new Rectangle(other.x, other.y, other.width, other.height));
-    }
 }

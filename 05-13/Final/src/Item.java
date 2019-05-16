@@ -24,4 +24,8 @@ public class Item {
         g.setColor(Color.GREEN);
         g.fillRect(x, y, width, height);
     }
+
+    public boolean intersects(Item other) {
+        return new Rectangle(x, y, width, height).intersects(new Rectangle(other.x, other.y, other.width, other.height));
+    }
 }
