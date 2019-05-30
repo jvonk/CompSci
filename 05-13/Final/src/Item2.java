@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
-public class Item {
+public class Item2 {
     public float opacity = 1.0f;
     public boolean canPickUp = true;
     public String className = "Item";
@@ -10,14 +10,14 @@ public class Item {
     public int x, y, width, height;
     public String name;
     public BufferedImage image = null, square = null;
-    public Item(int x, int y) {
+    public Item2(int x, int y) {
         this.speaking = false;
         this.x = x;
         this.y = y;
         this.width = 40;
         this.height = 60;
     }
-    public Item(int x, int y, int width, int height) {
+    public Item2(int x, int y, int width, int height) {
         this.speaking = false;
         this.x = x;
         this.y = y;
@@ -58,7 +58,7 @@ public class Item {
             g.setColor(Color.GREEN);
             g.fillRect(x, y, width, height);
         }
-        if (speaking && name != null) {
+        if (speaking && name != null && !(this instanceof Player)) {
             g.setColor(Color.LIGHT_GRAY);
             g.fillRect(75, 450, 450, 100);
             g.setColor(Color.BLACK);
@@ -83,6 +83,10 @@ public class Item {
     }
 
     public boolean intersects(Item other) {
+        return new Rectangle(x - width / 2, y - height, width, height).intersects(new Rectangle(other.x - other.width / 2, other.y - other.height, other.width, other.height));
+    }
+
+    public boolean intersects(Item2 other) {
         return new Rectangle(x - width / 2, y - height, width, height).intersects(new Rectangle(other.x - other.width / 2, other.y - other.height, other.width, other.height));
     }
 }
